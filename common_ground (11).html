@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Common Ground</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #f7f2ea; --white: #ffffff; --navy: #1b2242; --navy2: #2e3764;
+  --gold: #f5c518; --gold2: #ddb000; --gold-faint: #fdf6dc; --border: #e8e0d0;
+  --font: 'Plus Jakarta Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--cream); color: var(--navy); font-family: var(--font); line-height: 1.7; overflow-x: hidden; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(247,242,234,0.93); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: 60px; padding: 0 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { font-size: 17px; font-weight: 800; color: var(--navy); text-decoration: none; letter-spacing: -0.02em; white-space: nowrap; }
+.nav-logo span { color: var(--gold2); }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+.nav-links a { font-size: 14px; font-weight: 500; color: var(--navy); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+.nav-links a:hover { color: var(--gold2); }
+.nav-cta { font-size: 13px; font-weight: 700; color: var(--navy); background: var(--gold); padding: 9px 20px; border-radius: 50px; text-decoration: none; white-space: nowrap; }
+.nav-cta:hover { background: var(--gold2); }
+
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 2.5rem; }
+section { padding: 6rem 0; border-bottom: 1px solid var(--border); }
+.label { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold2); margin-bottom: 1rem; }
+h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.25rem; color: var(--navy); }
+h1 em { font-style: normal; color: var(--gold2); }
+h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.025em; margin-bottom: 1rem; color: var(--navy); }
+h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--navy); }
+p { color: var(--navy); font-size: 0.975rem; line-height: 1.8; }
+.lead { font-size: 1.1rem; max-width: 540px; margin-bottom: 2.5rem; color: var(--navy); }
+
+.btn { display: inline-block; font-size: 14px; font-weight: 700; padding: 13px 26px; border-radius: 50px; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; font-family: var(--font); }
+.btn-gold { background: var(--gold); color: var(--navy); }
+.btn-gold:hover { background: var(--gold2); }
+.btn-outline { background: var(--white); color: var(--navy); border: 2px solid var(--navy); }
+.btn-outline:hover { background: var(--navy); color: var(--white); }
+.btn-sm { font-size: 13px; padding: 10px 20px; }
+.btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--border); }
+
+.status-banner { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1rem 1.5rem; margin-bottom: 3rem; display: flex; align-items: center; gap: 12px; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; flex-shrink: 0; box-shadow: 0 0 0 3px rgba(34,197,94,0.2); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,0.2)}50%{box-shadow:0 0 0 6px rgba(34,197,94,0.1)} }
+.status-text { font-size: 13px; font-weight: 600; color: var(--navy); }
+.status-text span { color: var(--navy2); font-weight: 400; }
+
+#home { padding-top: 10rem; padding-bottom: 6rem; }
+.hero-kicker { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); margin-bottom: 1.5rem; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
+.hero-pills { display: flex; gap: 1rem; flex-wrap: wrap; }
+.pill { background: var(--white); border: 1px solid var(--border); border-radius: 50px; padding: 10px 20px; font-size: 13px; font-weight: 600; color: var(--navy); display: flex; align-items: center; gap: 8px; }
+.pill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+.focus-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; margin-top: 3rem; }
+.focus-box { background: var(--white); padding: 1.5rem; display: flex; align-items: flex-start; gap: 10px; }
+.focus-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px; }
+.focus-text { font-size: 0.875rem; font-weight: 600; color: var(--navy); line-height: 1.4; }
+
+.challenges-intro { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.challenges-intro p { max-width: 480px; margin: 0; }
+.challenges-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.challenge-card { background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; transition: border-color 0.2s, transform 0.2s; position: relative; }
+.challenge-card:hover { border-color: var(--gold2); transform: translateY(-2px); }
+.challenge-card.pilot-card { border-color: var(--gold2); }
+.pilot-badge { position: absolute; top: -10px; left: 1.25rem; background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 700; padding: 2px 10px; border-radius: 50px; letter-spacing: 0.08em; text-transform: uppercase; }
+.challenge-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 50px; letter-spacing: 0.07em; text-transform: uppercase; }
+.tag-nonprofit { background: #e8f3fd; color: #1a5a8a; }
+.tag-startup { background: #ede8ff; color: #5b21b6; }
+.tag-community { background: #fef3c7; color: #92400e; }
+.tag-research { background: #d1fae5; color: #065f46; }
+.tag-gov { background: #fce7f3; color: #9d174d; }
+.tag-smb { background: #fff7ed; color: #9a3412; }
+.challenge-title { font-size: 0.95rem; font-weight: 700; color: var(--navy); line-height: 1.4; }
+.challenge-desc { font-size: 0.85rem; color: var(--navy); line-height: 1.6; flex: 1; }
+.challenge-meta { display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+.challenge-org { font-size: 11px; font-weight: 600; color: var(--navy2); }
+.challenge-skill { font-size: 11px; color: var(--navy2); background: var(--cream); padding: 3px 8px; border-radius: 50px; }
+.challenge-footer { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; padding-top: 0.75rem; border-top: 1px solid var(--border); margin-top: auto; }
+.challenge-track { font-size: 10px; font-weight: 700; padding: 2px 9px; border-radius: 50px; background: var(--cream); color: var(--navy2); }
+.challenge-diff { font-size: 10px; font-weight: 700; padding: 2px 9px; border-radius: 50px; }
+.diff-seedling { background: #dcfce7; color: #16a34a; }
+.diff-builder { background: #dbeafe; color: #1d4ed8; }
+.diff-contributor { background: #ede9fe; color: #6d28d9; }
+.challenges-footer { margin-top: 1.5rem; text-align: center; }
+.challenges-footer p { font-size: 0.9rem; color: var(--navy); margin-bottom: 1rem; }
+
+.founder-note { background: var(--navy); border-radius: 24px; padding: 2.5rem 3rem; margin-top: 3rem; position: relative; }
+.founder-note blockquote { font-size: 1.05rem; line-height: 1.8; color: var(--white); font-style: italic; margin-bottom: 1.5rem; max-width: 640px; }
+.founder-note blockquote em { color: var(--gold); font-style: normal; }
+.founder-sig { display: flex; align-items: center; gap: 12px; }
+.founder-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; color: var(--navy); flex-shrink: 0; }
+.founder-name { font-size: 14px; font-weight: 700; color: var(--white); }
+.founder-title { font-size: 12px; color: #8890b8; }
+.founder-label { position: absolute; top: 2rem; right: 2.5rem; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #8890b8; }
+
+.supporters-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.supporter-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.5rem; }
+.supporter-name { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.supporter-role { font-size: 12px; color: var(--navy2); opacity: 0.7; }
+.supporter-note { font-size: 12px; color: var(--navy); margin-top: 0.5rem; font-style: italic; line-height: 1.5; }
+.supporter-placeholder { background: var(--cream); border: 1.5px dashed var(--border); border-radius: 14px; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: center; }
+.supporter-placeholder span { font-size: 12px; color: var(--navy2); opacity: 0.5; font-style: italic; }
+
+.exploring-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem; }
+.exploring-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; }
+.exploring-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--gold-faint); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.exploring-card h3 { font-size: 0.9rem; margin-bottom: 0.25rem; }
+.exploring-card p { font-size: 0.83rem; max-width: 100%; }
+.exploring-status { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 50px; margin-top: 0.5rem; letter-spacing: 0.06em; text-transform: uppercase; background: var(--gold-faint); color: var(--navy2); }
+
+.about-split { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; margin-top: 2.5rem; }
+.about-text p { margin-bottom: 1rem; }
+.about-values { display: flex; flex-direction: column; gap: 1rem; }
+.value-row { display: flex; gap: 1rem; align-items: flex-start; background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; }
+.value-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 2px; }
+.value-row h3 { font-size: 0.9rem; margin-bottom: 0.2rem; }
+.value-row p { font-size: 0.85rem; max-width: 100%; }
+
+.card { background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 1.75rem; }
+.card-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2.5rem; }
+.step-num { font-size: 11px; font-weight: 700; color: var(--gold2); letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+.step-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 50px; margin-top: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.badge-org { background: #e8f3fd; color: #1a5a8a; }
+.badge-builder { background: #ede8ff; color: #5b21b6; }
+.badge-both { background: var(--gold-faint); color: var(--navy2); }
+
+.who-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-top: 2rem; }
+.who-item { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 10px; }
+.who-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.who-item span { font-size: 0.9rem; font-weight: 600; color: var(--navy); }
+
+.feature-row { display: flex; flex-direction: column; gap: 1rem; margin-top: 2.5rem; }
+.feature-row .card { display: flex; gap: 1.25rem; align-items: flex-start; padding: 1.25rem 1.5rem; }
+.feat-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--gold-faint); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.feat-text h3 { font-size: 0.95rem; }
+.feat-text p { font-size: 0.875rem; max-width: 100%; }
+
+.cta-banner { background: var(--navy); border-radius: 24px; padding: 3rem; margin-top: 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+.cta-banner h3 { font-size: 1.3rem; color: var(--white); margin-bottom: 0.5rem; }
+.cta-banner p { color: var(--white); max-width: 400px; font-size: 0.9rem; }
+
+.involve-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2.5rem; }
+.involve-card { background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+.involve-card p { font-size: 0.9rem; max-width: 100%; flex: 1; }
+
+footer { background: var(--navy); padding: 3rem 0; }
+footer .wrap { display: flex; align-items: center; justify-content: space-between; }
+.footer-logo { font-size: 15px; font-weight: 800; color: var(--white); }
+.footer-logo span { color: var(--gold); }
+.footer-sub { font-size: 12px; color: var(--white); margin-top: 3px; }
+.footer-links { display: flex; gap: 1.5rem; list-style: none; }
+.footer-links a { font-size: 13px; color: var(--white); text-decoration: none; }
+.footer-links a:hover { color: var(--gold); }
+
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+.modal-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(27,34,66,0.55); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 1.5rem; }
+.modal-overlay.active { display: flex; }
+.modal { background: var(--white); border-radius: 24px; padding: 2.5rem; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; position: relative; animation: modalIn 0.3s ease; }
+@keyframes modalIn { from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none} }
+.modal-close { position: absolute; top: 1.25rem; right: 1.25rem; background: var(--cream); border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--navy); }
+.modal h2 { font-size: 1.4rem; margin-bottom: 0.25rem; }
+.modal .modal-sub { font-size: 14px; color: var(--navy); margin-bottom: 2rem; }
+.form-group { margin-bottom: 1.25rem; }
+.form-group label { display: block; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; }
+.form-group input,.form-group textarea,.form-group select { width: 100%; padding: 11px 14px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--cream); font-family: var(--font); font-size: 14px; color: var(--navy); outline: none; transition: border-color 0.2s; appearance: none; }
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus { border-color: var(--gold2); }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.chip { font-size: 12px; font-weight: 600; padding: 5px 13px; border-radius: 50px; border: 1.5px solid var(--border); background: var(--cream); color: var(--navy); cursor: pointer; transition: all 0.15s; user-select: none; }
+.chip.selected { background: var(--gold); border-color: var(--gold2); }
+.form-submit { width: 100%; margin-top: 1.5rem; padding: 14px; background: var(--gold); color: var(--navy); border: none; border-radius: 50px; font-family: var(--font); font-size: 15px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+.form-submit:hover { background: var(--gold2); }
+.success-msg { display: none; text-align: center; padding: 2rem 0; }
+.success-msg .success-icon { font-size: 3rem; margin-bottom: 1rem; }
+.success-msg h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+
+/* LIFECYCLE */
+.lifecycle-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 2.5rem; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; }
+.lifecycle-step { display: flex; gap: 1.25rem; padding: 1.75rem; background: var(--white); border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); align-items: flex-start; }
+.lifecycle-step:nth-child(even) { border-right: none; }
+.lifecycle-step:nth-last-child(-n+2) { border-bottom: none; }
+.lifecycle-num { font-size: 11px; font-weight: 700; color: var(--gold2); letter-spacing: 0.1em; flex-shrink: 0; padding-top: 3px; min-width: 24px; }
+.lifecycle-content h3 { font-size: 0.95rem; margin-bottom: 0.3rem; }
+.lifecycle-content p { font-size: 0.85rem; max-width: 100%; }
+
+/* SUCCESS SECTION */
+.success-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2.5rem; }
+.success-card { background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 1.75rem; display: flex; gap: 1.25rem; align-items: flex-start; }
+.success-icon { font-size: 1.75rem; flex-shrink: 0; margin-top: 2px; }
+.success-body h3 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+.success-body p { font-size: 0.85rem; max-width: 100%; margin-bottom: 0.75rem; }
+.success-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 10px; border-radius: 50px; background: var(--gold-faint); color: var(--navy2); letter-spacing: 0.07em; text-transform: uppercase; }
+
+/* SAMPLE CHALLENGE */
+.sample-challenge {
+  background: var(--white); border: 1.5px solid var(--gold2);
+  border-radius: 24px; overflow: hidden; margin-top: 2.5rem;
+}
+.sc-header {
+  background: var(--navy); padding: 2rem 2.5rem;
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.sc-header-left { flex: 1; }
+.sc-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+.sc-title { font-size: 1.3rem; font-weight: 800; color: var(--white); line-height: 1.3; margin-bottom: 0.75rem; }
+.sc-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.sc-tag { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 50px; letter-spacing: 0.06em; text-transform: uppercase; }
+.sc-tag-nonprofit { background: #1e3a5f; color: #93c5fd; }
+.sc-tag-open { background: #14532d; color: #86efac; }
+.sc-org-card { background: rgba(255,255,255,0.07); border-radius: 14px; padding: 1.25rem 1.5rem; min-width: 200px; }
+.sc-org-name { font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 3px; }
+.sc-org-meta { font-size: 12px; color: #8890b8; line-height: 1.6; }
+
+.sc-body { padding: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+.sc-section { margin-bottom: 1.75rem; }
+.sc-section:last-child { margin-bottom: 0; }
+.sc-section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold2); margin-bottom: 0.75rem; }
+.sc-section p { font-size: 0.9rem; max-width: 100%; margin-bottom: 0.5rem; }
+.sc-section p:last-child { margin-bottom: 0; }
+
+.sc-workflow { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.sc-workflow li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.875rem; color: var(--navy); }
+.sc-workflow li::before { content: attr(data-num); font-size: 10px; font-weight: 700; color: var(--gold2); background: var(--gold-faint); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+
+.sc-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.sc-bullets li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.875rem; color: var(--navy); }
+.sc-bullets li::before { content: "→"; font-weight: 700; color: var(--gold2); flex-shrink: 0; }
+
+.sc-directions { display: flex; flex-direction: column; gap: 0.5rem; }
+.sc-direction { background: var(--cream); border-radius: 10px; padding: 0.6rem 1rem; font-size: 0.85rem; color: var(--navy); font-weight: 500; }
+
+.sc-skills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.sc-skill { background: var(--cream); border: 1px solid var(--border); border-radius: 50px; font-size: 12px; font-weight: 600; padding: 4px 12px; color: var(--navy); }
+
+.sc-impact { background: var(--gold-faint); border-radius: 14px; padding: 1.25rem 1.5rem; }
+.sc-impact-num { font-size: 1.5rem; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; margin-bottom: 2px; }
+.sc-impact-label { font-size: 12px; color: var(--navy2); }
+.sc-impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+.sc-footer { padding: 1.5rem 2.5rem; border-top: 1px solid var(--border); background: var(--cream); display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.sc-footer-note { font-size: 0.875rem; color: var(--navy); max-width: 480px; }
+.sc-footer-note strong { font-weight: 700; }
+
+/* MORE CHALLENGES TABS */
+.challenges-nav { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.ch-tab { font-size: 13px; font-weight: 600; padding: 8px 18px; border-radius: 50px; border: 1.5px solid var(--border); background: var(--white); color: var(--navy); cursor: pointer; transition: all 0.2s; }
+.ch-tab.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.ch-panel { display: none; }
+.ch-panel.active { display: block; }
+
+/* TRY IT BAR */
+.try-it-bar { background: var(--navy); border-radius: 20px; padding: 2rem 2.5rem; margin-top: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.try-it-bar h3 { font-size: 1.1rem; font-weight: 800; color: var(--white); margin-bottom: 0.3rem; }
+.try-it-bar p { font-size: 0.875rem; color: #8890b8; max-width: 420px; }
+
+/* ── EXPLORER OVERLAY STYLES ── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #f7f2ea; --white: #ffffff; --navy: #1b2242; --navy2: #2e3764;
+  --gold: #f5c518; --gold2: #ddb000; --gold-faint: #fdf6dc; --border: #e8e0d0;
+  --font: 'Plus Jakarta Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+.explorer-modal-inner body_unused { background: var(--cream); color: var(--navy); font-family: var(--font); line-height: 1.7; min-height: 100vh; }
+
+.explorer-nav {
+  background: rgba(247,242,234,0.96); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: 60px; padding: 0 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.explorer-nav .enav-logo { font-size: 17px; font-weight: 800; color: var(--navy); text-decoration: none; }
+.nav-logo span { color: var(--gold2); }
+.explorer-nav .enav-back { font-size: 13px; font-weight: 600; color: var(--navy2); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+.nav-back:hover { color: var(--navy); }
+
+.explorer-page { max-width: 900px; margin: 0 auto; padding: 3rem 2.5rem 6rem; }
+
+/* STAGE SYSTEM */
+.stage { display: none; }
+.stage.active { display: block; }
+
+/* ── STAGE 0: INTRO ── */
+.intro-hero { text-align: center; padding: 3rem 0 2rem; }
+.intro-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold2); margin-bottom: 1rem; }
+.intro-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; color: var(--navy); margin-bottom: 1rem; }
+.intro-hero h1 em { font-style: normal; color: var(--gold2); }
+.intro-hero p { font-size: 1.05rem; color: var(--navy2); max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.7; }
+.intro-how { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 2.5rem; }
+.intro-step { background: var(--white); padding: 1.25rem; text-align: center; }
+.intro-step-num { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold2); margin-bottom: 0.5rem; }
+.intro-step-text { font-size: 0.85rem; font-weight: 600; color: var(--navy); line-height: 1.4; }
+.intro-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ── STAGE 1: CHALLENGE ── */
+.challenge-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+.challenge-topbar h2 { font-size: 1rem; font-weight: 700; color: var(--navy2); }
+.btn-shuffle { font-size: 13px; font-weight: 600; background: var(--white); color: var(--navy); border: 1.5px solid var(--border); padding: 7px 16px; border-radius: 50px; cursor: pointer; font-family: var(--font); display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
+.btn-shuffle:hover { border-color: var(--navy); }
+
+.ch-header { background: var(--navy); border-radius: 20px 20px 0 0; padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; }
+.ch-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+.ch-title { font-size: 1.4rem; font-weight: 800; color: var(--white); line-height: 1.25; margin-bottom: 0.75rem; }
+.ch-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.ch-tag { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 50px; letter-spacing: 0.06em; text-transform: uppercase; }
+.tag-type { background: #1e3a5f; color: #93c5fd; }
+.tag-open { background: #14532d; color: #86efac; }
+.ch-org { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 1rem 1.25rem; min-width: 180px; flex-shrink: 0; }
+.ch-org-name { font-size: 0.9rem; font-weight: 700; color: var(--white); margin-bottom: 3px; }
+.ch-org-meta { font-size: 12px; color: #8890b8; line-height: 1.6; }
+
+.ch-.explorer-modal-inner body_unused { background: var(--white); border: 1px solid var(--border); border-top: none; border-radius: 0 0 20px 20px; padding: 2rem 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+.ch-card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold2); margin-bottom: 0.75rem; }
+.ch-section { margin-bottom: 1.5rem; }
+.ch-section:last-child { margin-bottom: 0; }
+.ch-section p { font-size: 0.875rem; margin-bottom: 0.5rem; }
+.ch-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.ch-list li { font-size: 0.875rem; display: flex; gap: 8px; align-items: flex-start; }
+.ch-list li::before { content: "→"; color: var(--gold2); font-weight: 700; flex-shrink: 0; }
+.wf-list li::before { content: attr(data-n); font-size: 10px; font-weight: 700; background: var(--gold-faint); color: var(--gold2); width: 18px; height: 18px; min-width: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+.dir-pills { display: flex; flex-direction: column; gap: 0.4rem; }
+.dir-pill { background: var(--cream); border-radius: 8px; padding: 0.45rem 0.875rem; font-size: 0.83rem; font-weight: 500; }
+.skill-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.skill-chip { background: var(--cream); border: 1px solid var(--border); border-radius: 50px; font-size: 11px; font-weight: 600; padding: 3px 10px; }
+
+/* ── STAGE 2: LEVEL PICKER ── */
+.level-header { margin-bottom: 1.5rem; }
+.level-header h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.4rem; }
+.level-header p { font-size: 0.95rem; color: var(--navy2); }
+.level-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.level-card { border: 2px solid var(--border); border-radius: 18px; padding: 1.5rem; cursor: pointer; transition: all 0.2s; background: var(--white); }
+.level-card:hover { border-color: var(--gold2); transform: translateY(-2px); }
+.lbadge { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 50px; margin-bottom: 0.75rem; letter-spacing: 0.07em; text-transform: uppercase; }
+.lb-seed { background: #dcfce7; color: #16a34a; }
+.lb-builder { background: #dbeafe; color: #1d4ed8; }
+.lb-contrib { background: #ede9fe; color: #6d28d9; }
+.level-name { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; }
+.level-scope-text { font-size: 0.83rem; color: var(--navy2); line-height: 1.5; margin-bottom: 1rem; }
+.level-scope-box { background: var(--cream); border-radius: 10px; padding: 0.875rem 1rem; }
+.level-scope-title { font-size: 0.83rem; font-weight: 700; color: var(--navy); margin-bottom: 0.2rem; }
+.level-scope-desc { font-size: 0.78rem; color: var(--navy2); line-height: 1.5; }
+.level-cta { margin-top: 1rem; width: 100%; padding: 10px; background: var(--navy); color: var(--white); border: none; border-radius: 50px; font-family: var(--font); font-size: 13px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+.level-cta:hover { background: var(--navy2); }
+
+/* ── STAGE 3: PROMPTS ── */
+.prompt-header { margin-bottom: 1.5rem; }
+.prompt-header h2 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.25rem; }
+.prompt-header p { font-size: 0.875rem; color: var(--navy2); }
+.prompt-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.prompt-challenge-tag { font-size: 12px; font-weight: 600; color: var(--navy2); background: var(--white); border: 1px solid var(--border); padding: 4px 12px; border-radius: 50px; }
+
+.progress-bar { display: flex; gap: 6px; margin-bottom: 2rem; }
+.prog-seg { height: 4px; flex: 1; border-radius: 2px; background: var(--border); transition: background 0.3s; }
+.prog-seg.done { background: var(--gold2); }
+.prog-seg.active { background: var(--navy); }
+
+.prompt-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; margin-bottom: 1.5rem; }
+.prompt-num { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold2); margin-bottom: 0.75rem; }
+.prompt-q { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem; line-height: 1.35; }
+.prompt-hint { font-size: 0.875rem; color: var(--navy2); margin-bottom: 1.25rem; line-height: 1.6; }
+.prompt-examples { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+.prompt-ex { font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 50px; border: 1.5px solid var(--border); background: var(--cream); color: var(--navy); cursor: pointer; transition: all 0.15s; line-height: 1.3; }
+.prompt-ex:hover { background: var(--gold-faint); border-color: var(--gold2); }
+.prompt-ex.used { background: var(--gold-faint); border-color: var(--gold2); }
+textarea.prompt-input { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--border); background: var(--cream); font-family: var(--font); font-size: 14px; color: var(--navy); outline: none; resize: vertical; min-height: 100px; transition: border-color 0.2s; line-height: 1.6; }
+textarea.prompt-input:focus { border-color: var(--gold2); }
+.prompt-.explorer-nav { display: flex; justify-content: space-between; align-items: center; }
+
+/* ── STAGE 4: RESULTS ── */
+.results-hero { background: var(--navy); border-radius: 20px; padding: 2.5rem; text-align: center; margin-bottom: 2rem; }
+.results-hero h2 { font-size: 1.6rem; font-weight: 800; color: var(--white); margin-bottom: 0.5rem; }
+.results-hero p { font-size: 0.95rem; color: #8890b8; max-width: 480px; margin: 0 auto; }
+
+.strengths-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 2rem; }
+.strength-card { background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 1.5rem; text-align: center; }
+.strength-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.strength-name { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem; }
+.strength-desc { font-size: 0.83rem; color: var(--navy2); line-height: 1.5; }
+
+.thinking-style { background: var(--gold-faint); border: 1.5px solid var(--gold2); border-radius: 18px; padding: 1.75rem; margin-bottom: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap; }
+.thinking-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold2); margin-bottom: 0.4rem; }
+.thinking-type { font-size: 1.2rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem; }
+.thinking-desc { font-size: 0.875rem; color: var(--navy2); line-height: 1.6; }
+
+.answers-review { background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 1.75rem; margin-bottom: 2rem; }
+.answers-review h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1.25rem; }
+.answer-row { border-left: 3px solid var(--gold); padding: 0.75rem 1rem; margin-bottom: 0.875rem; background: var(--cream); border-radius: 0 10px 10px 0; }
+.answer-row:last-child { margin-bottom: 0; }
+.answer-q { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gold2); margin-bottom: 0.3rem; }
+.answer-a { font-size: 0.875rem; color: var(--navy); line-height: 1.6; }
+
+.results-cta { background: var(--navy); border-radius: 20px; padding: 2.5rem; text-align: center; }
+.results-cta h3 { color: var(--white); font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
+.results-cta p { color: #8890b8; font-size: 0.9rem; margin-bottom: 1.75rem; max-width: 420px; margin-left: auto; margin-right: auto; }
+.results-cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* BUTTONS */
+.btn { display: inline-block; font-size: 14px; font-weight: 700; padding: 12px 24px; border-radius: 50px; cursor: pointer; border: none; font-family: var(--font); transition: all 0.2s; text-decoration: none; }
+.btn-gold { background: var(--gold); color: var(--navy); }
+.btn-gold:hover { background: var(--gold2); }
+.btn-outline { background: var(--white); color: var(--navy); border: 2px solid var(--navy); }
+.btn-outline:hover { background: var(--navy); color: var(--white); }
+.btn-ghost { background: transparent; color: var(--navy2); border: 1.5px solid var(--border); }
+.btn-ghost:hover { border-color: var(--navy); color: var(--navy); }
+.btn-sm { font-size: 13px; padding: 9px 18px; }
+
+.explorer-nav {
+  background: rgba(247,242,234,0.96); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: 60px; padding: 0 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.explorer-nav .enav-logo { font-size: 17px; font-weight: 800; color: var(--navy); text-decoration: none; cursor:pointer; }
+.explorer-nav .enav-logo span { color: var(--gold2); }
+.explorer-nav .enav-back { font-size: 13px; font-weight: 600; color: var(--navy2); text-decoration: none; display: flex; align-items: center; gap: 6px; cursor:pointer; }
+.explorer-nav .enav-back:hover { color: var(--navy); }
+
+
+/* ORG WIZARD */
+.wizard-overlay { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(27,34,66,0.6); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 1.5rem; }
+.wizard-overlay.active { display: flex; }
+.wizard-modal { background: var(--white); border-radius: 24px; width: 100%; max-width: 600px; max-height: 92vh; overflow-y: auto; position: relative; animation: modalIn 0.3s ease; display: flex; flex-direction: column; }
+.wizard-header { padding: 1.75rem 2rem 0; }
+.wizard-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+.wizard-title { font-size: 1.2rem; font-weight: 800; color: var(--navy); }
+.wizard-close { background: var(--cream); border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--navy); flex-shrink: 0; }
+.wizard-progress { display: flex; gap: 4px; margin-bottom: 0; }
+.wizard-prog-seg { height: 4px; flex: 1; border-radius: 2px; background: var(--border); transition: background 0.3s; }
+.wizard-prog-seg.done { background: var(--gold2); }
+.wizard-prog-seg.active { background: var(--navy); }
+.wizard-body { padding: 1.75rem 2rem; flex: 1; }
+.wizard-step { display: none; }
+.wizard-step.active { display: block; }
+.wizard-step-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold2); margin-bottom: 0.5rem; }
+.wizard-step h3 { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 0.35rem; line-height: 1.35; }
+.wizard-step .w-hint { font-size: 0.875rem; color: var(--navy2); margin-bottom: 1.5rem; line-height: 1.6; }
+.w-field { margin-bottom: 1.25rem; }
+.w-field label { display: block; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; }
+.w-field input, .w-field textarea, .w-field select { width: 100%; padding: 11px 14px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--cream); font-family: var(--font); font-size: 14px; color: var(--navy); outline: none; transition: border-color 0.2s; appearance: none; line-height: 1.6; }
+.w-field input:focus, .w-field textarea:focus, .w-field select:focus { border-color: var(--gold2); }
+.w-field textarea { resize: vertical; min-height: 90px; }
+.w-example { background: var(--gold-faint); border-left: 3px solid var(--gold2); border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin-top: 0.5rem; font-size: 0.83rem; color: var(--navy2); line-height: 1.6; }
+.w-example strong { color: var(--navy); font-weight: 700; }
+.wizard-footer { padding: 1.25rem 2rem 1.75rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.wizard-footer-left { font-size: 12px; color: var(--navy2); }
+.wizard-success { text-align: center; padding: 2rem 0; }
+.wizard-success .ws-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+.wizard-success h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
+.wizard-success p { font-size: 0.9rem; color: var(--navy2); max-width: 380px; margin: 0 auto; }
+
+</style>
+</head>
+<body>
+
+<!-- BUILDER MODAL -->
+<div class="modal-overlay" id="builderModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('builderModal')">×</button>
+    <h2>I want to contribute</h2>
+    <p class="modal-sub">Tell us about yourself and we'll connect you with challenges that match what you do.</p>
+    <div id="builderForm">
+      <div class="form-group"><label>Full name</label><input type="text" placeholder="Alex Johnson"></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="alex@email.com"></div>
+      <div class="form-group"><label>Where are you based?</label><input type="text" placeholder="San Antonio, TX"></div>
+      <div class="form-group"><label>LinkedIn or GitHub (optional)</label><input type="text" placeholder="github.com/alexj"></div>
+      <div class="form-group">
+        <label>What do you do?</label>
+        <div class="chips">
+          <span class="chip" onclick="toggleChip(this)">Developer</span>
+          <span class="chip" onclick="toggleChip(this)">Designer</span>
+          <span class="chip" onclick="toggleChip(this)">Researcher</span>
+          <span class="chip" onclick="toggleChip(this)">Data / ML</span>
+          <span class="chip" onclick="toggleChip(this)">Automation</span>
+          <span class="chip" onclick="toggleChip(this)">Freelancer</span>
+          <span class="chip" onclick="toggleChip(this)">Mentor</span>
+          <span class="chip" onclick="toggleChip(this)">Student</span>
+          <span class="chip" onclick="toggleChip(this)">Other</span>
+        </div>
+      </div>
+      <div class="form-group"><label>What kind of problems do you want to work on?</label><textarea placeholder="e.g. I want to help community organizations automate their operations, or build tools that make local services more accessible..."></textarea></div>
+      <button class="form-submit" onclick="submitForm('builderForm','builderSuccess')">Join the community →</button>
+    </div>
+    <div class="success-msg" id="builderSuccess">
+      <div class="success-icon">🎉</div>
+      <h3>Welcome to Common Ground!</h3>
+      <p>We'll reach out when meaningful challenges come in that match what you're looking to build.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ORG MODAL -->
+<div class="modal-overlay" id="orgModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('orgModal')">×</button>
+    <h2>Share your challenge</h2>
+    <p class="modal-sub">Describe what's in the way. Our community will help figure out a path forward.</p>
+    <div id="orgForm">
+      <div class="form-group"><label>Organization or project name</label><input type="text" placeholder="e.g. Riverside Community Kitchen"></div>
+      <div class="form-group"><label>Your name</label><input type="text" placeholder="Maria Gonzalez"></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="maria@org.org"></div>
+      <div class="form-group">
+        <label>What best describes you?</label>
+        <select><option value="" disabled selected>Select one</option><option>Nonprofit</option><option>Startup</option><option>Small business</option><option>Community group</option><option>Research project</option><option>Local government</option><option>Student organization</option><option>Independent founder</option><option>Other</option></select>
+      </div>
+      <div class="form-group"><label>Describe your challenge</label><textarea placeholder="e.g. We track volunteer hours manually every week across three spreadsheets. It takes hours and we always make mistakes..."></textarea></div>
+      <button class="form-submit" onclick="submitForm('orgForm','orgSuccess')">Share it →</button>
+    </div>
+    <div class="success-msg" id="orgSuccess">
+      <div class="success-icon">✅</div>
+      <h3>Challenge received!</h3>
+      <p>We'll follow up soon to connect you with people who are excited to help.</p>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <a class="nav-logo" href="#home">Common<span>Ground</span></a>
+  <ul class="nav-links">
+    <li><a href="#challenges">Challenges</a></li>
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#for-builders">Builders</a></li>
+    <li><a href="#for-orgs">Organizations</a></li>
+  </ul>
+  <a class="nav-cta" href="#get-involved">Get involved</a>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="wrap">
+    <div class="status-banner reveal">
+      <div class="status-dot"></div>
+      <div class="status-text">Early access · <span>Onboarding our first pilot organizations and builders now</span></div>
+    </div>
+    <p class="hero-kicker reveal">Open source · Nonprofit · Community-driven</p>
+    <h1 class="reveal d1">Real problems worth solving.<br>People who want to help.<br><em>Finding each other.</em></h1>
+    <p class="lead reveal d2">Common Ground connects nonprofits, community groups, and civic organizations with builders, designers, and researchers who want to work on problems that actually matter.</p>
+    <div class="hero-actions reveal d3">
+      <button class="btn btn-gold" onclick="openOrgWizard()">Post your challenge →</button>
+      <a href="javascript:void(0)" onclick="openExplorer()" class="btn btn-outline">I want to help</a>
+    </div>
+    <div class="hero-pills reveal d4">
+      <div class="pill"><span class="pill-dot"></span>Free for nonprofits</div>
+      <div class="pill"><span class="pill-dot"></span>San Antonio first</div>
+      <div class="pill"><span class="pill-dot"></span>Real problems, real builders</div>
+    </div>
+    <div class="focus-row reveal">
+      <div class="focus-box"><div class="focus-dot"></div><div class="focus-text">Recruiting founding builders</div></div>
+      <div class="focus-box"><div class="focus-dot"></div><div class="focus-text">Onboarding pilot organizations</div></div>
+      <div class="focus-box"><div class="focus-dot"></div><div class="focus-text">Launching challenge board</div></div>
+      <div class="focus-box"><div class="focus-dot"></div><div class="focus-text">Open source development</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- DEFAULT USE CASE -->
+<section id="default-case" style="background: var(--navy); padding: 0; border: none;">
+  <div class="wrap" style="padding-top: 4rem; padding-bottom: 4rem;">
+    <span class="label reveal" style="color: var(--gold);">The default use case</span>
+    <h2 class="reveal d1" style="color: var(--white); margin-bottom: 0.75rem;">A nonprofit has a manual process<br>eating their team's time.</h2>
+    <p class="reveal d2" style="color: #8890b8; max-width: 520px; margin-bottom: 3rem;">A local developer builds them a simple tool or automation. The nonprofit gets hours back every week. The builder gets a real project with real stakes. That's the loop.</p>
+    <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden;" class="reveal d2">
+      <div style="background: rgba(255,255,255,0.04); padding: 1.5rem;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">01</div>
+        <div style="font-size:0.9rem;font-weight:700;color:var(--white);margin-bottom:0.3rem;">Org posts a challenge</div>
+        <div style="font-size:0.8rem;color:#8890b8;line-height:1.5;">Describes the problem, current workflow, and what success looks like.</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); padding: 1.5rem;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">02</div>
+        <div style="font-size:0.9rem;font-weight:700;color:var(--white);margin-bottom:0.3rem;">Builder finds it</div>
+        <div style="font-size:0.8rem;color:#8890b8;line-height:1.5;">Browses open challenges, reads the context, expresses interest.</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); padding: 1.5rem;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">03</div>
+        <div style="font-size:0.9rem;font-weight:700;color:var(--white);margin-bottom:0.3rem;">They connect</div>
+        <div style="font-size:0.8rem;color:#8890b8;line-height:1.5;">Direct introduction. No middlemen. They align on scope and get to work.</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); padding: 1.5rem;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">04</div>
+        <div style="font-size:0.9rem;font-weight:700;color:var(--white);margin-bottom:0.3rem;">Problem gets solved</div>
+        <div style="font-size:0.8rem;color:#8890b8;line-height:1.5;">The org gains a tool, automation, or system. The builder gains a real project.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE CHALLENGE -->
+<section id="sample-challenge">
+  <div class="wrap">
+    <span class="label reveal">What a challenge looks like</span>
+    <h2 class="reveal d1">This is what gets posted here.</h2>
+    <p class="reveal d2">A Common Ground challenge isn't a job listing. It's a situation — with background, context, and an open invitation to help figure out the solution together.</p>
+
+    <div class="sample-challenge reveal">
+
+      <div class="sc-header">
+        <div class="sc-header-left">
+          <div class="sc-label">Open challenge · Pilot example</div>
+          <div class="sc-title">Volunteer Scheduling &amp; Coordination</div>
+          <div class="sc-tags">
+            <span class="sc-tag sc-tag-nonprofit">Nonprofit</span>
+            <span class="sc-tag sc-tag-open">Open for builders</span>
+          </div>
+        </div>
+        <div class="sc-org-card">
+          <div class="sc-org-name">Riverside Community Kitchen</div>
+          <div class="sc-org-meta">
+            Nonprofit · San Antonio, TX<br>
+            Free meals &amp; grocery assistance<br>
+            ~200 volunteers per week
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-body">
+        <div>
+          <div class="sc-section">
+            <div class="sc-section-title">Background</div>
+            <p>Riverside Community Kitchen coordinates approximately 200 volunteers each week across three programs: meal preparation, food distribution, and community outreach.</p>
+            <p>The organization has grown significantly over the past two years. Its volunteer management process has not.</p>
+          </div>
+
+          <div class="sc-section">
+            <div class="sc-section-title">Current workflow</div>
+            <ul class="sc-workflow">
+              <li data-num="1">Volunteers fill out a Google Form expressing interest</li>
+              <li data-num="2">Responses are manually copied into a spreadsheet</li>
+              <li data-num="3">Staff assign shifts by hand</li>
+              <li data-num="4">Volunteers receive individual confirmation emails</li>
+              <li data-num="5">Reminder emails are sent one by one</li>
+              <li data-num="6">Hours are tracked in a separate spreadsheet</li>
+            </ul>
+          </div>
+
+          <div class="sc-section">
+            <div class="sc-section-title">The problem</div>
+            <p>This process takes 6–8 hours of staff time every week. When someone cancels last minute, finding a replacement means phone calls and individual emails.</p>
+            <p>Volunteers report frustration: shifts are hard to view, communication is inconsistent, and opportunities aren't always visible until they're filled.</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="sc-section">
+            <div class="sc-section-title">What success looks like</div>
+            <ul class="sc-bullets">
+              <li>Volunteer opportunities are easy to browse and sign up for</li>
+              <li>Reminders go out automatically</li>
+              <li>Hours are tracked without manual entry</li>
+              <li>Staff spend less time on coordination and more time on the mission</li>
+            </ul>
+          </div>
+
+          <div class="sc-section">
+            <div class="sc-section-title">Possible directions — not requirements</div>
+            <div class="sc-directions">
+              <div class="sc-direction">A custom web app</div>
+              <div class="sc-direction">A low-code solution (Airtable, Notion)</div>
+              <div class="sc-direction">Google Workspace automation</div>
+              <div class="sc-direction">An existing volunteer platform, configured well</div>
+              <div class="sc-direction">Something nobody has thought of yet</div>
+            </div>
+            <p style="font-size:0.8rem; margin-top:0.75rem; font-style:italic; opacity:0.7;">The goal is not to build software. The goal is to solve the problem.</p>
+          </div>
+
+          <div class="sc-section">
+            <div class="sc-section-title">Skills that might help</div>
+            <div class="sc-skills">
+              <span class="sc-skill">Web Development</span>
+              <span class="sc-skill">UX Design</span>
+              <span class="sc-skill">Automation</span>
+              <span class="sc-skill">Product Thinking</span>
+              <span class="sc-skill">Operations</span>
+            </div>
+          </div>
+
+          <div class="sc-section">
+            <div class="sc-section-title">Expected impact</div>
+            <div class="sc-impact">
+              <div class="sc-impact-grid">
+                <div>
+                  <div class="sc-impact-num">300+</div>
+                  <div class="sc-impact-label">Staff hours saved annually</div>
+                </div>
+                <div>
+                  <div class="sc-impact-num">200</div>
+                  <div class="sc-impact-label">Volunteers with a better experience</div>
+                </div>
+                <div>
+                  <div class="sc-impact-num">∞</div>
+                  <div class="sc-impact-label">Families better served</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-footer">
+        <div class="sc-footer-note">
+          <strong>We're looking for people</strong> who want to understand the problem, talk with stakeholders, and help design a practical solution. No prior nonprofit experience required.
+        </div>
+        <button class="btn btn-gold btn-sm" onclick="openModal('builderModal')">I want to work on this →</button>
+      </div>
+
+    </div>
+
+    <div class="try-it-bar reveal">
+      <div>
+        <h3>Try a challenge yourself →</h3>
+        <p>Read a real challenge, pick your level, answer a few judgment questions, and find out what kind of builder you are. Takes about 5 minutes.</p>
+      </div>
+      <a href="javascript:void(0)" onclick="openExplorer()" class="btn btn-gold" style="white-space:nowrap;">Open the explorer →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PILOT CHALLENGES -->
+<section id="challenges">
+  <div class="wrap">
+    <span class="label reveal">Pilot challenges</span>
+    <div class="challenges-intro reveal d1">
+      <div>
+        <h2 style="margin-bottom:0.5rem;">This is what happens here.</h2>
+        <p>These are examples of the kinds of challenges you'll find on Common Ground. Real challenges will be posted as we onboard our first partners.</p>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="openModal('orgModal')" style="flex-shrink:0;">Post a challenge</button>
+    </div>
+    <div class="challenges-grid">
+      <div class="challenge-card pilot-card reveal d1"><div class="pilot-badge">Pilot example</div><span class="challenge-tag tag-nonprofit">Nonprofit</span><div class="challenge-title">Automate volunteer scheduling and hour tracking</div><div class="challenge-desc">We manage 200+ volunteers across three programs using spreadsheets and email chains. It takes our coordinator 6 hours a week and we constantly have gaps.</div><div class="challenge-footer"><span class="challenge-track">⚙️ Automation</span><span class="challenge-diff diff-seedling">🌱 Seedling</span></div><div class="challenge-meta" style="border-top:none;padding-top:0.5rem;"><span class="challenge-org">Riverside Community Kitchen</span></div></div>
+      <div class="challenge-card pilot-card reveal d2"><div class="pilot-badge">Pilot example</div><span class="challenge-tag tag-startup">Startup</span><div class="challenge-title">Build a prototype dashboard for client reporting</div><div class="challenge-desc">We manually pull data from three tools every week to send client reports. We need a simple dashboard that does this automatically.</div><div class="challenge-footer"><span class="challenge-track">⚙️ Full Stack</span><span class="challenge-diff diff-builder">🔨 Builder</span></div><div class="challenge-meta" style="border-top:none;padding-top:0.5rem;"><span class="challenge-org">Stackable Labs</span></div></div>
+      <div class="challenge-card pilot-card reveal d3"><div class="pilot-badge">Pilot example</div><span class="challenge-tag tag-community">Community group</span><div class="challenge-title">Map accessibility resources across the city</div><div class="challenge-desc">We want an interactive map of wheelchair-accessible entrances, ramps, and transit stops. The data exists — we just need help making it usable.</div><div class="challenge-footer"><span class="challenge-track">📊 Data</span><span class="challenge-diff diff-seedling">🌱 Seedling</span></div><div class="challenge-meta" style="border-top:none;padding-top:0.5rem;"><span class="challenge-org">OpenPath Collective</span></div></div>
+      <div class="challenge-card pilot-card reveal d1"><div class="pilot-badge">Pilot example</div><span class="challenge-tag tag-research">Research</span><div class="challenge-title">Visualize 10 years of food insecurity data</div><div class="challenge-desc">We have a decade of county-level data sitting in CSVs. We want interactive charts that help us tell this story to policymakers and donors.</div><div class="challenge-footer"><span class="challenge-track">📊 Data</span><span class="challenge-diff diff-builder">🔨 Builder</span></div><div class="challenge-meta" style="border-top:none;padding-top:0.5rem;"><span class="challenge-org">Meridian Research Group</span></div></div>
+      <div class="challenge-card pilot-card reveal d2"><div class="pilot-badge">Pilot example</div><span class="challenge-tag tag-smb">Small business</span><div class="challenge-title">Modernize our intake process for new clients</div><div class="challenge-desc">New clients fill out a paper form, we re-enter it manually, then email a PDF confirmation. There has to be a better way.</div><div class="challenge-footer"><span class="challenge-track">🌐 Web Dev</span><span class="challenge-diff diff-seedling">🌱 Seedling</span></div><div class="challenge-meta" style="border-top:none;padding-top:0.5rem;"><span class="challenge-org">Greenfield Legal</span></div></div>
+      <div class="challenge-card pilot-card reveal d3"><div class="pilot-badge">Pilot example</div><span class="challenge-tag tag-gov">Civic org</span><div class="challenge-title">Make city budget data legible to residents</div><div class="challenge-desc">Our city publishes a 400-page PDF budget every year. Almost no one reads it. We want to turn it into something residents can actually explore.</div><div class="challenge-footer"><span class="challenge-track">📊 Data</span><span class="challenge-diff diff-contributor">⭐ Contributor</span></div><div class="challenge-meta" style="border-top:none;padding-top:0.5rem;"><span class="challenge-org">Civic Commons Project</span></div></div>
+    </div>
+    <div class="challenges-footer reveal">
+      <p>Have a challenge like these? We're onboarding our first real partners now.</p>
+      <button class="btn btn-gold" onclick="openModal('orgModal')">Post your challenge →</button>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- MORE CHALLENGES -->
+<section id="more-challenges">
+  <div class="wrap">
+    <span class="label reveal">Challenge library</span>
+    <h2 class="reveal d1">More challenges like this one.</h2>
+    <p class="reveal d2">Every challenge on Common Ground tells a story — background, context, and an open invitation to help. These are three more examples of what that looks like.</p>
+
+    <div class="challenges-nav reveal">
+      <div class="ch-tab active" onclick="showChallenge('budget')">Making City Budget Data Understandable</div>
+      <div class="ch-tab" onclick="showChallenge('accessibility')">Community Accessibility Mapping</div>
+      <div class="ch-tab" onclick="showChallenge('grants')">Grant Discovery for Small Nonprofits</div>
+    </div>
+
+    <!-- CHALLENGE: CITY BUDGET -->
+    <div class="ch-panel active" id="ch-budget">
+      <div class="sample-challenge">
+        <div class="sc-header">
+          <div class="sc-header-left">
+            <div class="sc-label">Open challenge · Pilot example</div>
+            <div class="sc-title">Making City Budget Data Understandable</div>
+            <div class="sc-tags">
+              <span class="sc-tag sc-tag-nonprofit">Civic org</span>
+              <span class="sc-tag sc-tag-open">Open for builders</span>
+            </div>
+          </div>
+          <div class="sc-org-card">
+            <div class="sc-org-name">Civic Commons Project</div>
+            <div class="sc-org-meta">
+              Civic org · San Antonio, TX<br>
+              Open government advocacy<br>
+              Serving all city residents
+            </div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div>
+            <div class="sc-section">
+              <div class="sc-section-title">Background</div>
+              <p>Every year, the city publishes its annual budget — a document that determines how hundreds of millions of dollars get spent on schools, roads, parks, housing, and public safety.</p>
+              <p>Almost no one reads it. Not because residents don't care. Because it's a 400-page PDF written in bureaucratic language, with no search, no navigation, and no context.</p>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">Current workflow</div>
+              <ul class="sc-workflow">
+                <li data-num="1">City publishes a PDF budget document annually</li>
+                <li data-num="2">Reporters spend hours manually extracting figures</li>
+                <li data-num="3">Advocates search the PDF for specific line items</li>
+                <li data-num="4">Residents who want to engage have no entry point</li>
+                <li data-num="5">Public comment periods pass with little participation</li>
+              </ul>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">The problem</div>
+              <p>The information exists. It's public. It's required by law. But in its current form, it's effectively inaccessible to anyone who isn't a professional researcher or journalist.</p>
+              <p>Civic participation suffers not because people don't care about how their city spends money — but because the tools to understand it don't exist.</p>
+            </div>
+          </div>
+          <div>
+            <div class="sc-section">
+              <div class="sc-section-title">What success looks like</div>
+              <ul class="sc-bullets">
+                <li>A resident can find how much the city spends on parks in under 30 seconds</li>
+                <li>Journalists can quickly compare year-over-year spending changes</li>
+                <li>Community groups can share specific budget breakdowns with their members</li>
+                <li>Public comment participation increases meaningfully</li>
+              </ul>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">Possible directions — not requirements</div>
+              <div class="sc-directions">
+                <div class="sc-direction">An interactive budget explorer website</div>
+                <div class="sc-direction">A visual storytelling page (charts, plain language)</div>
+                <div class="sc-direction">A searchable database with category breakdowns</div>
+                <div class="sc-direction">A plain-language summary generator</div>
+                <div class="sc-direction">A comparison tool across multiple years</div>
+              </div>
+              <p style="font-size:0.8rem; margin-top:0.75rem; font-style:italic; opacity:0.7;">The goal is civic understanding. The format is open.</p>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">Skills that might help</div>
+              <div class="sc-skills">
+                <span class="sc-skill">Data Visualization</span>
+                <span class="sc-skill">Web Development</span>
+                <span class="sc-skill">UX Design</span>
+                <span class="sc-skill">Journalism / Comms</span>
+                <span class="sc-skill">Civic Tech</span>
+              </div>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">Expected impact</div>
+              <div class="sc-impact">
+                <div class="sc-impact-grid">
+                  <div><div class="sc-impact-num">400+</div><div class="sc-impact-label">Pages made navigable</div></div>
+                  <div><div class="sc-impact-num">1M+</div><div class="sc-impact-label">Residents with access</div></div>
+                  <div><div class="sc-impact-num">↑</div><div class="sc-impact-label">Civic participation</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-footer">
+          <div class="sc-footer-note"><strong>We're looking for people</strong> who are curious about civic data, comfortable working with messy PDFs and spreadsheets, and interested in making government more legible to the people it serves.</div>
+          <button class="btn btn-gold btn-sm" onclick="openModal('builderModal')">I want to work on this →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHALLENGE: ACCESSIBILITY MAPPING -->
+    <div class="ch-panel" id="ch-accessibility">
+      <div class="sample-challenge">
+        <div class="sc-header">
+          <div class="sc-header-left">
+            <div class="sc-label">Open challenge · Pilot example</div>
+            <div class="sc-title">Community Accessibility Mapping</div>
+            <div class="sc-tags">
+              <span class="sc-tag sc-tag-nonprofit">Community group</span>
+              <span class="sc-tag sc-tag-open">Open for builders</span>
+            </div>
+          </div>
+          <div class="sc-org-card">
+            <div class="sc-org-name">OpenPath Collective</div>
+            <div class="sc-org-meta">
+              Community group · San Antonio, TX<br>
+              Disability advocacy &amp; access<br>
+              Serving residents citywide
+            </div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div>
+            <div class="sc-section">
+              <div class="sc-section-title">Background</div>
+              <p>For people with mobility challenges, planning a trip across the city requires knowing which entrances are accessible, where ramps exist, which transit stops have working elevators, and which routes are actually navigable.</p>
+              <p>That information exists — but it's scattered across city government spreadsheets, transit agency databases, and volunteer-compiled notes. There is no single place to find it.</p>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">Current workflow</div>
+              <ul class="sc-workflow">
+                <li data-num="1">Advocates manually compile accessibility data from multiple city sources</li>
+                <li data-num="2">Data lives in spreadsheets that aren't publicly shared</li>
+                <li data-num="3">Residents rely on word of mouth or personal experience</li>
+                <li data-num="4">When infrastructure changes, updates don't happen consistently</li>
+                <li data-num="5">No centralized reporting mechanism for broken or missing access points</li>
+              </ul>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">The problem</div>
+              <p>Residents with disabilities can't reliably plan accessible routes. The data exists — in fragments, across multiple sources — but has never been assembled into something usable.</p>
+              <p>The result is that people either avoid unfamiliar areas entirely, or discover inaccessible barriers after they've already traveled to get there.</p>
+            </div>
+          </div>
+          <div>
+            <div class="sc-section">
+              <div class="sc-section-title">What success looks like</div>
+              <ul class="sc-bullets">
+                <li>A resident can check accessibility before leaving home</li>
+                <li>Community members can report issues and suggest updates</li>
+                <li>Advocates have a shared, maintained data source to reference</li>
+                <li>City officials can see gaps and prioritize improvements</li>
+              </ul>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">Possible directions — not requirements</div>
+              <div class="sc-directions">
+                <div class="sc-direction">A public interactive map (Google Maps, Mapbox, Leaflet)</div>
+                <div class="sc-direction">A mobile-first website for on-the-go lookup</div>
+                <div class="sc-direction">A crowdsourced reporting tool</div>
+                <div class="sc-direction">Data standardization and open dataset publishing</div>
+                <div class="sc-direction">Integration with existing mapping platforms</div>
+              </div>
+              <p style="font-size:0.8rem; margin-top:0.75rem; font-style:italic; opacity:0.7;">This might be a map. It might be something else. Start with the need.</p>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">Skills that might help</div>
+              <div class="sc-skills">
+                <span class="sc-skill">Data / GIS</span>
+                <span class="sc-skill">Web Development</span>
+                <span class="sc-skill">UX / Accessibility Design</span>
+                <span class="sc-skill">Community Research</span>
+                <span class="sc-skill">Mobile Dev</span>
+              </div>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">Expected impact</div>
+              <div class="sc-impact">
+                <div class="sc-impact-grid">
+                  <div><div class="sc-impact-num">1 in 4</div><div class="sc-impact-label">Adults have a disability</div></div>
+                  <div><div class="sc-impact-num">0</div><div class="sc-impact-label">Centralized resources today</div></div>
+                  <div><div class="sc-impact-num">↑</div><div class="sc-impact-label">Mobility & independence</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-footer">
+          <div class="sc-footer-note"><strong>We're looking for people</strong> who care about accessibility, are comfortable working with geographic data, and want to build something that directly improves daily life for thousands of residents.</div>
+          <button class="btn btn-gold btn-sm" onclick="openModal('builderModal')">I want to work on this →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHALLENGE: GRANT DISCOVERY -->
+    <div class="ch-panel" id="ch-grants">
+      <div class="sample-challenge">
+        <div class="sc-header">
+          <div class="sc-header-left">
+            <div class="sc-label">Open challenge · Pilot example</div>
+            <div class="sc-title">Grant Discovery for Small Nonprofits</div>
+            <div class="sc-tags">
+              <span class="sc-tag sc-tag-nonprofit">Nonprofit</span>
+              <span class="sc-tag sc-tag-open">Open for builders</span>
+            </div>
+          </div>
+          <div class="sc-org-card">
+            <div class="sc-org-name">Meridian Research Group</div>
+            <div class="sc-org-meta">
+              Nonprofit research · Texas<br>
+              Community funding advocacy<br>
+              Supports 40+ local orgs
+            </div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div>
+            <div class="sc-section">
+              <div class="sc-section-title">Background</div>
+              <p>Small nonprofits — the kind doing direct community service with lean teams — are often the worst positioned to find the funding they're eligible for. They don't have grant writers. They don't have researchers. They have program staff doing three jobs at once.</p>
+              <p>The grants exist. Community foundations, federal programs, corporate giving initiatives — there is more funding available than most small orgs ever access. The problem is discovery.</p>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">Current workflow</div>
+              <ul class="sc-workflow">
+                <li data-num="1">Staff manually search Google, GrantWatch, Foundation Directory</li>
+                <li data-num="2">Opportunities are tracked in personal spreadsheets or email folders</li>
+                <li data-num="3">Deadlines are missed because no alert system exists</li>
+                <li data-num="4">Organizations don't know what neighboring orgs have already applied for</li>
+                <li data-num="5">Time spent searching comes directly out of program delivery hours</li>
+              </ul>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">The problem</div>
+              <p>Staff at small nonprofits spend significant time searching for grants instead of running programs. Many eligible opportunities are never found. Deadlines are missed. Funding that could reach communities doesn't.</p>
+              <p>The information exists — but it's fragmented, behind paywalls, or buried in email newsletters that require you to already know where to look.</p>
+            </div>
+          </div>
+          <div>
+            <div class="sc-section">
+              <div class="sc-section-title">What success looks like</div>
+              <ul class="sc-bullets">
+                <li>Staff spend less time searching and more time serving</li>
+                <li>Relevant opportunities surface automatically based on org profile</li>
+                <li>Deadline alerts prevent missed applications</li>
+                <li>Small orgs can see what funding peers have accessed</li>
+                <li>More community funding reaches the organizations doing direct work</li>
+              </ul>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">Possible directions — not requirements</div>
+              <div class="sc-directions">
+                <div class="sc-direction">A searchable, filterable grant portal</div>
+                <div class="sc-direction">Email or SMS deadline alerts</div>
+                <div class="sc-direction">AI-based matching by org mission and size</div>
+                <div class="sc-direction">A shared community grant database</div>
+                <div class="sc-direction">A lightweight CRM for tracking applications</div>
+              </div>
+              <p style="font-size:0.8rem; margin-top:0.75rem; font-style:italic; opacity:0.7;">A simple alert system might do more good than a complex platform. Start small.</p>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">Skills that might help</div>
+              <div class="sc-skills">
+                <span class="sc-skill">Web Development</span>
+                <span class="sc-skill">Data / APIs</span>
+                <span class="sc-skill">Automation</span>
+                <span class="sc-skill">UX Design</span>
+                <span class="sc-skill">Nonprofit Knowledge</span>
+              </div>
+            </div>
+            <div class="sc-section">
+              <div class="sc-section-title">Expected impact</div>
+              <div class="sc-impact">
+                <div class="sc-impact-grid">
+                  <div><div class="sc-impact-num">40+</div><div class="sc-impact-label">Local orgs who could benefit</div></div>
+                  <div><div class="sc-impact-num">$$$</div><div class="sc-impact-label">Funding currently missed</div></div>
+                  <div><div class="sc-impact-num">↑</div><div class="sc-impact-label">Community impact</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-footer">
+          <div class="sc-footer-note"><strong>We're looking for people</strong> who understand how nonprofits operate, are comfortable with data and APIs, and want to help more funding reach the communities that need it most.</div>
+          <button class="btn btn-gold btn-sm" onclick="openModal('builderModal')">I want to work on this →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <span class="label reveal">Why we exist</span>
+    <h2 class="reveal d1">This should be easier than it is.</h2>
+    <div class="about-split">
+      <div class="about-text reveal d1">
+        <p>There are people everywhere who want to use their skills to help — developers, designers, researchers, builders of all kinds. And there are nonprofits, community groups, and civic organizations with real problems they can't solve alone.</p>
+        <p>The gap between those two groups isn't a technical problem. Finding each other just shouldn't be this hard.</p>
+        <p>Common Ground is open source, nonprofit, and free. No investors, no fees, no algorithms. Think of it as a commons for local problem-solving — open infrastructure for people who want to work on things that matter, close to home.</p>
+        <p style="font-style:italic;border-left:3px solid var(--gold);padding-left:1rem;margin-top:1.25rem;">"A food bank doesn't care if you can reverse a binary tree. They care if you can fix their volunteer signup form." That's the kind of competence Common Ground is built around.</p>
+      </div>
+      <div class="about-values reveal d2">
+        <div class="value-row"><div class="value-icon">🏛️</div><div><h3>Built for orgs with no tech team</h3><p>You don't need to know what to build. Describe the problem — builders figure out the rest.</p></div></div>
+        <div class="value-row"><div class="value-icon">🤝</div><div><h3>Collaboration over transaction</h3><p>People here want to help — not just complete a task.</p></div></div>
+        <div class="value-row"><div class="value-icon">📍</div><div><h3>Local first</h3><p>Real impact starts close to home. We prioritize connecting builders with organizations in their own communities first.</p></div></div>
+      </div>
+    </div>
+    <div class="founder-note reveal">
+      <div class="founder-label">From the founder</div>
+      <blockquote>"I kept running into the same problem. A nonprofit struggling with something a student could solve in a weekend. A founder who needed a prototype but didn't know where to find help. A developer who wanted to do meaningful work but had no way to find it.<br><br>The tools to connect these people exist. The willingness exists. What was missing was a <em>common place to start</em>. That's what we're building."</blockquote>
+      <div class="founder-sig">
+        <div class="founder-avatar">S</div>
+        <div>
+          <div class="founder-name">Shruthi, Founder of Common Ground</div>
+          <div class="founder-title">Founder · Building in public</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EARLY SUPPORTERS -->
+<section id="supporters">
+  <div class="wrap">
+    <span class="label reveal">Early community</span>
+    <h2 class="reveal d1">The people who showed up first.</h2>
+    <p class="reveal d2">Common Ground is being shaped in conversations with builders, nonprofit operators, and community organizers. These are the kinds of people who make this real.</p>
+    <div class="supporters-grid">
+      <div class="supporter-card reveal d1">
+        <div class="supporter-name">Shruthi</div>
+        <div class="supporter-role">Founder · San Antonio, TX</div>
+        <div class="supporter-note">"I kept seeing the same gap — people who want to help and organizations that need it, with no good way to find each other. That's what we're fixing."</div>
+      </div>
+      <div class="supporter-card reveal d2">
+        <div class="supporter-name">Illustrative · Early builder</div>
+        <div class="supporter-role">Developer · Texas</div>
+        <div class="supporter-note">"I've been looking for a way to use my skills on something that actually matters to my community. Class projects stopped feeling like enough."</div>
+      </div>
+      <div class="supporter-card reveal d3">
+        <div class="supporter-name">Illustrative · Early org</div>
+        <div class="supporter-role">Nonprofit operations · San Antonio</div>
+        <div class="supporter-note">"We have real problems that a skilled student could solve in a weekend. We just never had a good way to find each other."</div>
+      </div>
+    </div>
+    <div class="supporters-cta reveal" style="margin-top: 1.5rem; background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+      <div>
+        <div style="font-size: 0.9rem; font-weight: 700; color: var(--navy);">Want your name here?</div>
+        <div style="font-size: 0.85rem; color: var(--navy2);">We're onboarding our first builders and pilot organizations now.</div>
+      </div>
+      <button class="btn btn-gold btn-sm" onclick="openModal('builderModal')">Join early →</button>
+    </div>
+  </div>
+</section>
+
+<!-- CURRENTLY EXPLORING -->
+<section id="exploring">
+  <div class="wrap">
+    <span class="label reveal">Currently exploring</span>
+    <h2 class="reveal d1">What we're working toward.</h2>
+    <p class="reveal d2">Common Ground is early. Here's what we're actively figuring out as we build in public.</p>
+    <div class="exploring-grid">
+      <div class="exploring-card reveal d1"><div class="exploring-icon">🗂️</div><div><h3>Challenge board</h3><p>A public feed of open challenges where builders can browse, comment, and express interest.</p><span class="exploring-status">In design</span></div></div>
+      <div class="exploring-card reveal d2"><div class="exploring-icon">🤝</div><div><h3>Pilot partnerships</h3><p>Onboarding 3–5 local organizations to post their first real challenges and work with our first builders.</p><span class="exploring-status">Actively recruiting</span></div></div>
+      <div class="exploring-card reveal d3"><div class="exploring-icon">👥</div><div><h3>Builder community</h3><p>A lightweight space — likely Discord or GitHub Discussions — for builders to find each other and collaborate.</p><span class="exploring-status">Coming soon</span></div></div>
+      <div class="exploring-card reveal d4"><div class="exploring-icon">📖</div><div><h3>Open source repo</h3><p>The platform itself will be open source. We're preparing the codebase and contribution guidelines now.</p><span class="exploring-status">In progress</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="wrap">
+    <span class="label reveal">How it works</span>
+    <h2 class="reveal d1">Simple enough to start today.</h2>
+    <p class="reveal d2">No algorithms, no matching scores — just people finding each other around shared purpose.</p>
+    <div class="card-grid-2">
+      <div class="card reveal d1"><div class="step-num">01</div><h3>A challenge gets posted</h3><p>An organization, founder, researcher, or community group describes something real — a broken process, a tool they need, a problem they've been sitting on for months. Plain language, no technical knowledge required.</p><span class="step-badge badge-org">For anyone with a challenge</span></div>
+      <div class="card reveal d2"><div class="step-num">02</div><h3>Builders browse and jump in</h3><p>Developers, designers, researchers, and contributors explore open challenges, ask questions, and start conversations. No formal application — just show up with genuine interest.</p><span class="step-badge badge-builder">For anyone who wants to help</span></div>
+      <div class="card reveal d3"><div class="step-num">03</div><h3>A plan comes together</h3><p>The right people align around an approach. Scope gets defined. Work begins — prototypes, automations, research, tools, or whatever the challenge actually calls for.</p><span class="step-badge badge-both">Together</span></div>
+      <div class="card reveal d4"><div class="step-num">04</div><h3>The organization moves forward</h3><p>The organization gets a useful tool, workflow, prototype, or insight they didn't have before. Builders gain real experience. Everyone learns something.</p><span class="step-badge badge-both">Real impact</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CHALLENGE LIFECYCLE -->
+<section id="lifecycle">
+  <div class="wrap">
+    <span class="label reveal">What actually happens</span>
+    <h2 class="reveal d1">What happens when a challenge is posted.</h2>
+    <p class="reveal d2">Common Ground is lightweight by design. No project management software, no formal contracts. Just a clear, human process that keeps things moving.</p>
+
+    <div class="lifecycle-row">
+      <div class="lifecycle-step reveal d1">
+        <div class="lifecycle-num">01</div>
+        <div class="lifecycle-content">
+          <h3>Challenge is posted</h3>
+          <p>An organization describes their problem in plain language. What's broken, what they've tried, what success looks like.</p>
+        </div>
+      </div>
+      <div class="lifecycle-step reveal d2">
+        <div class="lifecycle-num">02</div>
+        <div class="lifecycle-content">
+          <h3>Community asks questions</h3>
+          <p>Builders comment, clarify scope, and discuss approaches. The org responds. The problem gets sharper.</p>
+        </div>
+      </div>
+      <div class="lifecycle-step reveal d3">
+        <div class="lifecycle-num">03</div>
+        <div class="lifecycle-content">
+          <h3>Builders express interest</h3>
+          <p>One or more builders raise their hand. Solo or as a small team. No formal application — just genuine interest.</p>
+        </div>
+      </div>
+      <div class="lifecycle-step reveal d4">
+        <div class="lifecycle-num">04</div>
+        <div class="lifecycle-content">
+          <h3>Work happens in the open</h3>
+          <p>Progress is shared publicly. The org gives feedback. The community can follow along, offer input, or jump in.</p>
+        </div>
+      </div>
+      <div class="lifecycle-step reveal d1">
+        <div class="lifecycle-num">05</div>
+        <div class="lifecycle-content">
+          <h3>Challenge is completed</h3>
+          <p>The org confirms the work is useful. The solution — and the story of how it got built — is archived publicly.</p>
+        </div>
+      </div>
+      <div class="lifecycle-step reveal d2">
+        <div class="lifecycle-num">06</div>
+        <div class="lifecycle-content">
+          <h3>Story gets shared</h3>
+          <p>What was the problem? Who solved it? What did they build? The community grows every time a challenge closes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO BELONGS -->
+<section id="who">
+  <div class="wrap">
+    <span class="label reveal">Who belongs here</span>
+    <h2 class="reveal d1">If you want to build something useful,<br>you belong here.</h2>
+    <p class="reveal d2">Common Ground is for anyone willing to show up — whether you're posting a challenge or picking one up.</p>
+    <div class="who-grid">
+      <div class="who-item reveal d1"><span class="who-dot"></span><span>Nonprofits in San Antonio</span></div>
+      <div class="who-item reveal d2"><span class="who-dot"></span><span>Civic organizations & advocacy groups</span></div>
+      <div class="who-item reveal d1"><span class="who-dot"></span><span>Developers & engineers</span></div>
+      <div class="who-item reveal d2"><span class="who-dot"></span><span>Designers & UX researchers</span></div>
+      <div class="who-item reveal d1"><span class="who-dot"></span><span>Data analysts & researchers</span></div>
+      <div class="who-item reveal d2"><span class="who-dot"></span><span>Students & early-career builders</span></div>
+      <div class="who-item reveal d1"><span class="who-dot"></span><span>Freelancers with time to give</span></div>
+      <div class="who-item reveal d2"><span class="who-dot"></span><span>Experienced practitioners who want to mentor</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR BUILDERS -->
+<section id="for-builders">
+  <div class="wrap">
+    <span class="label reveal">For builders</span>
+    <h2 class="reveal d1">Work on real problems<br>in your own city.</h2>
+    <p class="reveal d2">San Antonio nonprofits and civic orgs have real technical problems — manual processes, missing tools, data that nobody can read. Browse open challenges and reach out when something clicks.</p>
+    <div class="feature-row">
+      <div class="card reveal d1"><div class="feat-icon">🔧</div><div class="feat-text"><h3>Work on problems that are real</h3><p>Every challenge comes from someone who genuinely needs help — not a made-up prompt or a tutorial exercise. Real stakes, real people, real outcomes.</p></div></div>
+      <div class="card reveal d2"><div class="feat-icon">🌍</div><div class="feat-text"><h3>Make an impact close to home</h3><p>Connect with local organizations, community groups, and founders doing meaningful work nearby. Proximity makes collaboration better.</p></div></div>
+      <div class="card reveal d3"><div class="feat-icon">🤝</div><div class="feat-text"><h3>Work directly with the org</h3><p>No middlemen. When you express interest in a challenge, you connect directly with the person who posted it. Real relationship, real context, real work.</p></div></div>
+    </div>
+    <div class="cta-banner reveal d4">
+      <div><h3>Browse open challenges →</h3><p>See what San Antonio nonprofits and civic orgs are working on right now.</p></div>
+      <button class="btn btn-gold" onclick="openModal('builderModal')">I want to contribute →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOR ORGS -->
+<section id="for-orgs">
+  <div class="wrap">
+    <span class="label reveal">For organizations</span>
+    <h2 class="reveal d1">Your org has real problems.<br>We find people who can help.</h2>
+    <p class="reveal d2">If you're a San Antonio nonprofit or civic org with a technical problem eating your team's time, Common Ground is for you. Post your challenge — builders will find it.</p>
+    <div class="feature-row">
+      <div class="card reveal d1"><div class="feat-icon">📋</div><div class="feat-text"><h3>Post in under 10 minutes</h3><p>Our guided form walks you through describing your challenge — background, current workflow, what success looks like. No technical knowledge needed.</p></div></div>
+      <div class="card reveal d2"><div class="feat-icon">🔍</div><div class="feat-text"><h3>Builders find you</h3><p>Your challenge is posted publicly. Local developers, designers, and researchers browse open challenges and reach out when something matches their skills and interests.</p></div></div>
+      <div class="card reveal d3"><div class="feat-icon">🔁</div><div class="feat-text"><h3>Discovery first, then collaboration</h3><p>Start by posting your challenge publicly. Builders find it, ask questions, and express interest. When the right match forms, the work begins.</p></div></div>
+    </div>
+    <div class="cta-banner reveal d4" style="background:var(--gold-faint);border:1.5px solid #e8d57a;">
+      <div><h3 style="color:var(--navy);">Ready to post your first challenge?</h3><p style="color:var(--navy);">Walk through our guided form. Takes about 10 minutes. Builders in San Antonio will find it.</p></div>
+      <button class="btn btn-gold" onclick="openModal('orgModal')">Post a challenge →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- WHAT SUCCESS LOOKS LIKE -->
+<section id="success">
+  <div class="wrap">
+    <span class="label reveal">Six months from now</span>
+    <h2 class="reveal d1">What we're building toward.</h2>
+    <p class="reveal d2">Common Ground is early. But the destination is clear. Here's what we're working toward — one solved challenge at a time.</p>
+    <div class="success-grid">
+      <div class="success-card reveal d1">
+        <div class="success-icon">🍽️</div>
+        <div class="success-body">
+          <h3>A food bank automated volunteer scheduling</h3>
+          <p>What used to take a coordinator 6 hours a week now runs on its own. Two builders from San Antonio built it in three weekends.</p>
+          <div class="success-tag">Automation · Completed</div>
+        </div>
+      </div>
+      <div class="success-card reveal d2">
+        <div class="success-icon">🗺️</div>
+        <div class="success-body">
+          <h3>A civic group got an accessibility map</h3>
+          <p>Data that had been sitting in spreadsheets became an interactive map that residents actually use. Built in public, shared openly.</p>
+          <div class="success-tag">Data · Completed</div>
+        </div>
+      </div>
+      <div class="success-card reveal d3">
+        <div class="success-icon">🧑‍💻</div>
+        <div class="success-body">
+          <h3>A builder got their first real project</h3>
+          <p>Not a tutorial. Not a class assignment. A real org, a real problem, a real solution — and a story they can actually tell.</p>
+          <div class="success-tag">Web Dev · Completed</div>
+        </div>
+      </div>
+      <div class="success-card reveal d1">
+        <div class="success-icon">🚀</div>
+        <div class="success-body">
+          <h3>A founder got a prototype in weeks</h3>
+          <p>Instead of waiting months to afford an agency, a local founder connected with two builders and shipped a working prototype.</p>
+          <div class="success-tag">Full Stack · Completed</div>
+        </div>
+      </div>
+    </div>
+    <p class="reveal" style="text-align:center; margin-top: 1.5rem; font-size: 0.9rem; font-style: italic; opacity: 0.7;">These are illustrative examples of what Common Ground is being built to make possible.</p>
+  </div>
+</section>
+
+<!-- GET INVOLVED -->
+<section id="get-involved">
+  <div class="wrap">
+    <span class="label reveal">Get involved</span>
+    <h2 class="reveal d1">Come build the commons with us.</h2>
+    <p class="reveal d2">Common Ground grows when people show up — as builders, as organizations, as contributors to the project itself. However you want to participate, there's a place for you.</p>
+    <div class="involve-grid">
+      <div class="involve-card reveal d1"><h3>I want to contribute</h3><p>Find a meaningful challenge nearby and start working alongside an organization that needs your skills.</p><button class="btn btn-gold btn-sm" onclick="openModal('builderModal')">Join the community →</button></div>
+      <div class="involve-card reveal d2"><h3>I have a challenge</h3><p>Post what's in your way and connect with builders who want to help you move forward.</p><button class="btn btn-outline btn-sm" onclick="openModal('orgModal')">Post a challenge</button></div>
+    </div>
+    <div class="cta-banner reveal d3" style="margin-top:1.25rem;">
+      <div><h3>Help build Common Ground itself</h3><p>This project is open source and community-maintained. Open an issue, contribute code, or help us spread the word. Everything helps.</p></div>
+      <a href="https://github.com" class="btn btn-sm" style="background:transparent;color:var(--white);border:2px solid var(--white);white-space:nowrap;flex-shrink:0;">View on GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="footer-logo">Common<span>Ground</span></div>
+      <div class="footer-sub">People who want to help. Problems worth solving. Finding each other.</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#challenges">Challenges</a></li>
+      <li><a href="https://github.com">GitHub</a></li>
+      <li><a href="#get-involved">Get involved</a></li>
+    </ul>
+  </div>
+</footer>
+
+
+
+<!-- EXPLORER OVERLAY -->
+<div id="explorer-modal" style="display:none; position:fixed; inset:0; z-index:500; background:var(--cream); overflow-y:auto;">
+  
+<div class="explorer-nav">
+  <a class="enav-logo" href="javascript:void(0)" onclick="closeExplorer()">Common<span>Ground</span></a>
+  <a class="enav-back" href="javascript:void(0)" onclick="closeExplorer()">← Back to home</a>
+</div>
+
+<div class="explorer-page">
+
+  <!-- STAGE 0: INTRO -->
+  <div class="stage active" id="stage-intro">
+    <div class="intro-hero">
+      <div class="intro-kicker">Interactive challenge explorer</div>
+      <h1>See if this is<br><em>your kind of work.</em></h1>
+      <p>Read a real challenge from a real organization. Pick how deep you want to go. Answer a few judgment questions. Find out what kind of builder you are.</p>
+      <div class="intro-how">
+        <div class="intro-step"><div class="intro-step-num">01</div><div class="intro-step-text">Read a real challenge</div></div>
+        <div class="intro-step"><div class="intro-step-num">02</div><div class="intro-step-text">Pick your level</div></div>
+        <div class="intro-step"><div class="intro-step-num">03</div><div class="intro-step-text">Answer judgment questions</div></div>
+        <div class="intro-step"><div class="intro-step-num">04</div><div class="intro-step-text">See your builder profile</div></div>
+      </div>
+      <div class="intro-cta">
+        <button class="btn btn-gold" onclick="startExplorer()">Open a challenge →</button>
+        <a href="javascript:void(0)" onclick="closeExplorer()" class="btn btn-ghost btn-sm">Back to home</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 1: CHALLENGE -->
+  <div class="stage" id="stage-challenge">
+    <div class="challenge-topbar">
+      <h2 id="challenge-label">Reading the challenge</h2>
+      <button class="btn-shuffle" onclick="shuffleChallenge()">🎲 Try a different challenge</button>
+    </div>
+    <div id="challenge-render"></div>
+    <div style="display:flex; justify-content:flex-end; margin-top:1.5rem;">
+      <button class="btn btn-gold" onclick="goToLevel()">Pick my level →</button>
+    </div>
+  </div>
+
+  <!-- STAGE 2: LEVEL -->
+  <div class="stage" id="stage-level">
+    <div class="level-header">
+      <h2>How do you want to engage?</h2>
+      <p>Same challenge. Different scope. Pick the level that fits where you are right now — you can always come back and try another.</p>
+    </div>
+    <div class="level-cards" id="level-cards-render"></div>
+  </div>
+
+  <!-- STAGE 3: PROMPTS -->
+  <div class="stage" id="stage-prompts">
+    <div class="prompt-header">
+      <h2>How would you approach this?</h2>
+      <p>These aren't coding questions. They're judgment questions — the kind that actually matter when working with a real organization.</p>
+    </div>
+    <div class="prompt-meta">
+      <span class="prompt-challenge-tag" id="prompt-challenge-tag"></span>
+      <span class="prompt-challenge-tag" id="prompt-level-tag"></span>
+    </div>
+    <div class="progress-bar" id="progress-bar"></div>
+    <div id="prompt-render"></div>
+    <div class="prompt-nav">
+      <button class="btn btn-ghost btn-sm" id="btn-prev" onclick="prevPrompt()">← Back</button>
+      <button class="btn btn-gold btn-sm" id="btn-next" onclick="nextPrompt()">Next →</button>
+    </div>
+  </div>
+
+  <!-- STAGE 4: RESULTS -->
+  <div class="stage" id="stage-results">
+    <div id="results-render"></div>
+  </div>
+
+</div>
+
+
+
+</div>
+
+<script>
+
+function openModal(id){document.getElementById(id).classList.add('active');document.body.style.overflow='hidden';}
+function closeModal(id){document.getElementById(id).classList.remove('active');document.body.style.overflow='';}
+document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeModal(o.id);}));
+function toggleChip(el){el.classList.toggle('selected');}
+function submitForm(fId,sId){document.getElementById(fId).style.display='none';document.getElementById(sId).style.display='block';}
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  const href = a.getAttribute('href');
+  if(!href || href==='#' || href.startsWith('javascript')) return;
+  e.preventDefault();
+  const t=document.querySelector(href);
+  if(t){closeModal('builderModal');closeModal('orgModal');t.scrollIntoView({behavior:'smooth'});}
+}));
+
+  function showChallenge(id) {
+    document.querySelectorAll('.ch-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.ch-panel').forEach(p => p.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+    document.getElementById('ch-' + id).classList.add('active');
+  }
+
+
+function openExplorer() {
+  const modal = document.getElementById('explorer-modal');
+  if (!modal) return;
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  if (!currentChallenge) { startExplorer(); } else { goTo('stage-intro'); }
+}
+function closeExplorer() {
+  const modal = document.getElementById('explorer-modal');
+  if (!modal) return;
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+const CHALLENGES = [
+  {
+    id: 'volunteer',
+    title: 'Volunteer Scheduling & Coordination',
+    type: 'Nonprofit',
+    org: 'Riverside Community Kitchen',
+    orgMeta: 'Nonprofit · San Antonio, TX<br>Free meals & grocery assistance<br>~200 volunteers/week',
+    background: ['Riverside Community Kitchen coordinates ~200 volunteers each week across meal prep, food distribution, and community outreach.','The organization has grown significantly over two years. Its volunteer management process has not.'],
+    workflow: ['Volunteers fill out a Google Form','Responses copied manually into a spreadsheet','Staff assign shifts by hand','Confirmation and reminder emails sent individually','Hours tracked in a separate spreadsheet'],
+    problem: ['This takes 6–8 staff hours every week. Last-minute cancellations require phone calls and individual emails.','Volunteers report frustration: shifts are hard to view, communication is inconsistent, and opportunities aren\'t always visible.'],
+    success: ['Volunteers can browse and sign up for shifts easily','Reminders go out automatically','Hours tracked without manual entry','Staff spend less time on coordination'],
+    directions: ['A custom web app','Low-code (Airtable, Notion)','Google Workspace automation','An existing platform, well configured','Something nobody has thought of yet'],
+    skills: ['Web Dev','Automation','UX Design','Product Thinking','Operations'],
+    scopes: {
+      seedling: { title: 'Build a single-shift signup flow', desc: 'Design or build just the signup step — a form that captures name, availability, and shift preference and saves it somewhere the coordinator can see. One piece, done well.' },
+      builder: { title: 'Build the full scheduling system', desc: 'End-to-end: signup, shift assignment, automated reminders, basic hour tracking. A coordinator should be able to use it without training.' },
+      contributor: { title: 'Architect the volunteer operations workflow', desc: 'Map the full picture — intake, scheduling, communication, reporting, retention. Lead a small team. Make build-vs-buy decisions. Own the outcome and present it to the org.' }
+    },
+    prompts: {
+      seedling: [
+        { q: 'What\'s the very first thing you\'d build or design?', hint: 'Think about just the signup step — not the whole system.', examples: ['A Google Form with better structure','A simple Airtable base','A one-page signup site','Ask the coordinator what info they actually need first'] },
+        { q: 'What\'s the one question you\'d ask the coordinator before starting?', hint: 'There\'s one piece of information that would change everything about your approach.', examples: ['How do volunteers currently hear about shifts?','What does a good week look like for you?','What\'s the most painful part of Monday morning?','How tech-savvy are your volunteers?'] },
+        { q: 'What would you need to consider about the volunteers using this?', hint: 'Think about who actually uses the signup — their age, tech comfort, how they access it.', examples: ['Many may be older and not tech-savvy','Mobile-first is probably important','Keep it under 3 clicks','Email confirmation builds trust'] }
+      ],
+      builder: [
+        { q: 'How would you approach the shift assignment piece specifically?', hint: 'This is where most solutions get complicated. What\'s your instinct?', examples: ['Self-serve signup with capacity limits','Coordinator assigns from a filtered view','Matching based on volunteer preferences','First come first served with a waitlist'] },
+        { q: 'What would you use to build this and why?', hint: 'Be specific — and explain the tradeoff you\'re making.', examples: ['Airtable + Zapier for speed','Custom app for flexibility','Google Sheets + Apps Script for zero cost','An existing platform like SignUpGenius'] },
+        { q: 'How would you handle last-minute cancellations?', hint: 'This is the hardest operational problem. Most systems ignore it.', examples: ['Automated SMS to the waitlist','Slack notification to the coordinator','Volunteers can swap shifts directly','Grace period before a replacement is found'] },
+        { q: 'What does "done" look like? How would you know it worked?', hint: 'Define success before you build anything.', examples: ['Coordinator spends <1hr/week on scheduling','Zero missed shifts due to communication gaps','Volunteer retention improves over 3 months','Coordinator says: I don\'t think about this anymore'] }
+      ],
+      contributor: [
+        { q: 'Before recommending any solution — what would you need to learn first?', hint: 'What would you do in week one before touching any tool?', examples: ['Shadow the coordinator for a week','Interview 5 volunteers about their experience','Map the current workflow end to end','Identify which step causes the most downstream problems'] },
+        { q: 'Build vs. buy — how do you think through this for a 5-person nonprofit?', hint: 'There are real tradeoffs between custom and off-the-shelf here.', examples: ['Existing tools are cheaper but may not fit','Custom means a maintenance burden on a tiny team','What happens when the builder leaves?','Long-term sustainability matters more than perfect fit'] },
+        { q: 'How would you structure a small team to work on this?', hint: 'You\'re leading contributors. Who do you actually need?', examples: ['One dev, one designer, one ops researcher','Start solo to avoid coordination overhead','Need someone who has worked with nonprofits before','The coordinator should be a co-designer, not just a user'] },
+        { q: 'How do you present your recommendation to the org?', hint: 'This is a real organization with limited time and limited trust in new systems.', examples: ['One-page summary with two options and a clear recommendation','A live demo beats any slide deck','Start with a 2-week pilot, not a full rollout','Show the coordinator using it herself in the first 5 minutes'] }
+      ]
+    },
+    strengthSignals: {
+      seedling: { style: 'The Empathetic Builder', desc: 'You think about the people first. Before touching any tool, you\'re asking who uses this and how. That instinct — centering the user experience before the architecture — is what separates builders who solve the right problem from those who solve the wrong one brilliantly.', strengths: [{ icon: '🤝', name: 'User Empathy', desc: 'You naturally center the experience of the person who has to use what you build.' }, { icon: '🎯', name: 'Focused Scope', desc: 'You resist overbuilding. You\'d rather do one thing well than three things poorly.' }, { icon: '💬', name: 'Stakeholder Thinking', desc: 'You ask the right questions before writing a line of code or designing a single screen.' }] },
+      builder: { style: 'The Systems Thinker', desc: 'You see the whole problem, not just the feature. You\'re thinking about edge cases, tradeoffs, and what happens six months after launch — not just what ships next week. Organizations don\'t need more code. They need people who think like this.', strengths: [{ icon: '⚙️', name: 'Systems Thinking', desc: 'You trace problems to their root and design solutions that hold together end to end.' }, { icon: '⚖️', name: 'Tradeoff Awareness', desc: 'You understand that every technical decision has a cost — and you make those tradeoffs explicitly.' }, { icon: '🔭', name: 'Long-term Vision', desc: 'You\'re thinking about sustainability and maintenance, not just the initial build.' }] },
+      contributor: { style: 'The Operator', desc: 'You lead from the problem, not the solution. You ask who\'s affected, what actually needs to change, and how you get from here to something that sticks — not just something that ships. That\'s rare. And it\'s exactly what organizations that have tried and failed with software need.', strengths: [{ icon: '🧭', name: 'Strategic Clarity', desc: 'You zoom out before zooming in. You understand the landscape before drawing a map.' }, { icon: '👥', name: 'Team Leadership', desc: 'You think about how to bring people along, not just how to build the thing.' }, { icon: '📐', name: 'Organizational Design', desc: 'You design for the organization, not just the user — understanding that adoption is the hardest part.' }] }
+    }
+  },
+  {
+    id: 'budget',
+    title: 'Making City Budget Data Understandable',
+    type: 'Civic org',
+    org: 'Civic Commons Project',
+    orgMeta: 'Civic org · San Antonio, TX<br>Open government advocacy<br>Serving all city residents',
+    background: ['Every year the city publishes its budget — a document determining how hundreds of millions of dollars get spent on schools, roads, parks, housing, and public safety.','Almost no one reads it. Not because residents don\'t care. Because it\'s a 400-page PDF written in bureaucratic language with no search, no navigation, and no context.'],
+    workflow: ['City publishes a PDF budget annually','Reporters spend hours manually extracting figures','Advocates search the PDF for specific line items','Residents who want to engage have no entry point','Public comment periods pass with little participation'],
+    problem: ['The information is public and required by law. In its current form it\'s effectively inaccessible to anyone who isn\'t a professional researcher or journalist.','Civic participation suffers not because people don\'t care about how their city spends money — but because tools to understand it don\'t exist.'],
+    success: ['A resident can find park spending in under 30 seconds','Journalists can compare year-over-year changes quickly','Community groups can share specific budget breakdowns','Public comment participation increases meaningfully'],
+    directions: ['An interactive budget explorer','Visual storytelling with charts and plain language','A searchable database with category breakdowns','A plain-language summary generator','Year-over-year comparison view'],
+    skills: ['Data Visualization','Web Dev','UX Design','Civic Tech','Journalism'],
+    scopes: {
+      seedling: { title: 'Make one department\'s budget readable', desc: 'Pick one city department — parks, housing, public safety — and turn its numbers into something a resident can understand. One page, clear language, one chart that tells the story.' },
+      builder: { title: 'Build a searchable budget explorer', desc: 'Parse the full budget PDF, structure the data, and build an interface where residents can search, filter by department, and see year-over-year changes.' },
+      contributor: { title: 'Design the civic data infrastructure', desc: 'Architect something other cities could adopt. Lead data standardization and work with local journalists and advocates to make sure it actually gets used.' }
+    },
+    prompts: {
+      seedling: [
+        { q: 'What\'s the most important thing a resident should be able to learn from a city budget?', hint: 'Start with the question, not the data.', examples: ['How much goes to police vs. parks?','Has education funding gone up or down?','What\'s the biggest line item nobody talks about?','How does our city compare to similar ones?'] },
+        { q: 'How would you explain "capital expenditure" to someone who\'s never read a budget?', hint: 'The language problem is half the problem. How do you solve it?', examples: ['Use plain English throughout','Add a glossary','Rewrite the categories in human terms','Show examples: capital expenditure = new buildings and equipment'] },
+        { q: 'What\'s one chart that would make the budget immediately more legible?', hint: 'One good visual beats a hundred numbers.', examples: ['A treemap showing relative department sizes','A bar chart of year-over-year changes','A pie chart of where the money goes','A what does $1 of your taxes pay for breakdown'] }
+      ],
+      builder: [
+        { q: 'A city budget PDF is messy. How would you extract and structure the data?', hint: 'This is a real technical problem. What\'s your approach?', examples: ['PDF parsing with Python (pdfplumber, tabula)','Manual data entry for accuracy','Find the raw data source behind the PDF','Request structured data from the city directly'] },
+        { q: 'What\'s the most important UX decision for a budget explorer?', hint: 'How people navigate data is as important as the data itself.', examples: ['Search-first — most users have a specific question','Browse by category — helps people discover','Year-over-year toggle on every view','Mobile-first because residents are on phones'] },
+        { q: 'How do you keep this accurate when the budget changes every year?', hint: 'A tool that goes stale loses trust immediately.', examples: ['Automated PDF import pipeline','Clear last-updated labeling','Open data format so others can update it','Partner with a local journalist to maintain it'] },
+        { q: 'Who would actually use this — and how would they find it?', hint: 'A tool nobody knows about helps nobody.', examples: ['Partner with local news outlets','Embed in neighborhood association newsletters','Submit to the city\'s open data portal','Make it shareable — every view gets its own URL'] }
+      ],
+      contributor: [
+        { q: 'This problem exists in every city. How do you build something reusable?', hint: 'Think beyond San Antonio. What would make this work anywhere?', examples: ['Standard data schema other cities could adopt','Open source everything from day one','Document the process so other civic groups can replicate it','Build modular components, not a monolith'] },
+        { q: 'Who are the real stakeholders — and which ones matter most?', hint: 'Residents, journalists, advocates, city staff all have different needs.', examples: ['Journalists need speed and accuracy above all','Advocates need shareability and citation','Residents need simplicity and plain language','City staff might become allies if you frame it right'] },
+        { q: 'What would make a city actually promote this tool?', hint: 'If the city links to it, adoption solves itself.', examples: ['Frame it as transparency, not criticism','Involve a city data liaison early','Make the city look good — highlight positive spending','Show them other cities that have done this successfully'] },
+        { q: 'How do you measure whether this worked?', hint: 'Civic tech often gets built and forgotten.', examples: ['Time journalists spend on budget research (before vs. after)','Public comment participation rates during budget season','Whether the city uses it in their own communications','Number of times shared during the annual budget release'] }
+      ]
+    },
+    strengthSignals: {
+      seedling: { style: 'The Storyteller', desc: 'You understand that data is only useful when it communicates something. Your instinct is to start with the question a human being is actually asking — not the data structure. That\'s a rare combination of analytical and empathetic thinking.', strengths: [{ icon: '📖', name: 'Narrative Thinking', desc: 'You translate complex information into stories people can actually act on.' }, { icon: '👁️', name: 'Visual Intuition', desc: 'You know that the right chart does more work than pages of explanation.' }, { icon: '🎯', name: 'Audience Focus', desc: 'You design for the resident who has 30 seconds, not the analyst who has 30 hours.' }] },
+      builder: { style: 'The Data Engineer', desc: 'You see the full pipeline — from messy PDF to useful interface — and you think carefully about each step. You\'re not just building a website; you\'re building a system that has to stay accurate, discoverable, and maintainable. That\'s a fundamentally different kind of thinking.', strengths: [{ icon: '🏗️', name: 'Pipeline Thinking', desc: 'You think about data as infrastructure — where it comes from, how it flows, how it stays fresh.' }, { icon: '🔍', name: 'Discoverability', desc: 'You understand that a tool nobody finds is a tool nobody uses.' }, { icon: '🔄', name: 'Sustainability', desc: 'You design for the year after launch, not just the launch.' }] },
+      contributor: { style: 'The Civic Designer', desc: 'You\'re thinking about systems change, not just software. You understand that the hardest part of civic tech isn\'t the code — it\'s getting institutions to adopt something new. You\'re designing for that reality from the start.', strengths: [{ icon: '🌐', name: 'Systems Change', desc: 'You\'re not just building for one city. You\'re building something that could change how this works everywhere.' }, { icon: '🏛️', name: 'Institutional Thinking', desc: 'You understand how to work with — and through — bureaucratic systems.' }, { icon: '📡', name: 'Ecosystem Design', desc: 'You think about who else needs to be involved for this to actually work.' }] }
+    }
+  },
+  {
+    id: 'grants',
+    title: 'Grant Discovery for Small Nonprofits',
+    type: 'Nonprofit',
+    org: 'Meridian Research Group',
+    orgMeta: 'Nonprofit research · Texas<br>Community funding advocacy<br>Supports 40+ local orgs',
+    background: ['Small nonprofits doing direct community service are often the worst positioned to find the funding they\'re eligible for. They don\'t have grant writers. They have program staff doing three jobs at once.','The grants exist. Community foundations, federal programs, corporate giving. There is more funding available than most small orgs ever access. The problem is discovery.'],
+    workflow: ['Staff manually search Google, GrantWatch, Foundation Directory','Opportunities tracked in personal spreadsheets or email folders','Deadlines missed because no alert system exists','No visibility into what neighboring orgs have already applied for','Search time comes directly out of program delivery hours'],
+    problem: ['Staff spend significant time searching for grants instead of running programs. Many eligible opportunities are never found. Deadlines are missed.','The information exists — but it\'s fragmented, behind paywalls, or buried in newsletters that require you to already know where to look.'],
+    success: ['Staff spend less time searching, more time serving','Relevant opportunities surface automatically','Deadline alerts prevent missed applications','More community funding reaches direct-service orgs'],
+    directions: ['A searchable, filterable grant portal','Email or SMS deadline alerts','AI-based matching by org mission and size','A shared community grant database','A lightweight application tracker'],
+    skills: ['Web Dev','Data / APIs','Automation','UX Design','Nonprofit Knowledge'],
+    scopes: {
+      seedling: { title: 'Build a grant deadline tracker', desc: 'Start with the most painful part: missed deadlines. Build a simple system where a nonprofit logs grants they\'re tracking and gets email reminders before deadlines. One focused problem, solved well.' },
+      builder: { title: 'Build a grant discovery portal', desc: 'A searchable database of grants filtered by org type, location, and funding area. Nonprofits browse, save opportunities, and set deadline alerts. Clean, fast, and actually useful.' },
+      contributor: { title: 'Design a shared funding intelligence system', desc: 'Architect a community-owned grant database that multiple orgs contribute to and benefit from. Think about data sourcing, maintenance, org profiling for matching, and how this sustains itself.' }
+    },
+    prompts: {
+      seedling: [
+        { q: 'If you could only solve one part of the grant discovery problem, which part would have the highest impact?', hint: 'There are several pain points. Which one matters most?', examples: ['Missed deadlines — that\'s money left on the table','Not knowing what grants exist at all','Spending hours on grants you\'re not eligible for','No system to track what you\'ve already applied for'] },
+        { q: 'What information would a nonprofit need to enter to get useful grant alerts?', hint: 'The simpler the onboarding, the more orgs will actually use it.', examples: ['Mission area (food, housing, education, etc.)','Annual operating budget','Location and geography served','501(c)(3) status and year founded'] },
+        { q: 'How would you make sure the alerts actually get read and acted on?', hint: 'Email inboxes are noisy. What makes your alert different?', examples: ['One alert per week, not daily noise','Plain subject line: 3 grants due in 14 days','Include the grant name, amount, and a direct link','Let them choose SMS vs. email'] }
+      ],
+      builder: [
+        { q: 'Where does the grant data come from — and how do you keep it current?', hint: 'This is the core technical challenge. Grant databases go stale fast.', examples: ['Scrape public foundation sites (legal gray area)','Partner with GrantWatch or Foundation Directory API','Community-contributed — orgs add what they find','Part-time researcher to curate manually'] },
+        { q: 'How do you match a grant to an org that might be eligible?', hint: 'Matching is harder than it sounds.', examples: ['Tag-based filtering (sector, geography, budget size)','Keyword matching against org mission statement','Let orgs build a profile, surface relevant grants','Simple eligibility checklist on each grant listing'] },
+        { q: 'How do you make this free to use while covering your costs?', hint: 'Most grant databases charge fees small orgs can\'t afford.', examples: ['Grant funding to run the tool itself','Foundation or corporate sponsorship','Completely free, open source, community-maintained','Freemium: basic free, advanced features paid'] },
+        { q: 'What\'s the MVP — the smallest version that\'s actually useful?', hint: 'What would make a coordinator say "I\'m glad this exists" on day one?', examples: ['20 curated grants with good metadata and deadline alerts','A simple form: enter your org type, get a filtered list','A shared Airtable that 5 orgs start contributing to','A weekly email newsletter of new grants'] }
+      ],
+      contributor: [
+        { q: 'How do you build something that stays useful after you stop working on it?', hint: 'Most civic tech tools die when the original builder moves on.', examples: ['Open source it so others can take over','Build a coalition of orgs who co-own the data','Design for low maintenance from day one','Document everything as if you\'re handing it off tomorrow'] },
+        { q: 'The Foundation Directory charges $200+/month. How do you think about competing with that?', hint: 'Your differentiation isn\'t features — it\'s something else.', examples: ['We serve orgs too small to afford $200/month','Community ownership means no incentive to raise prices','Hyper-local focus they don\'t have','We\'re solving discovery, not grant management'] },
+        { q: 'What would make 40 nonprofits switch to this from their current spreadsheets?', hint: 'Behavior change is the hardest part of any civic tech project.', examples: ['One coordinator at a well-respected org becomes a champion','A foundation requires all grantees to use it','Run a workshop showing ROI: hours saved times hourly cost','Start with 5 orgs, show results, let word of mouth spread'] },
+        { q: 'How do you think about data privacy for orgs using this system?', hint: 'Orgs may not want competitors knowing what grants they\'re pursuing.', examples: ['Application tracking is always private','Shared discovery, private tracking','Opt-in to share what you\'ve applied for','No login required for browsing — only tracking is private'] }
+      ]
+    },
+    strengthSignals: {
+      seedling: { style: 'The Focused Problem-Solver', desc: 'You go straight to the highest-leverage pain point and design a solution that\'s actually adoptable. You\'re not trying to solve everything — you\'re trying to solve the right thing. That discipline is genuinely hard to teach.', strengths: [{ icon: '🎯', name: 'Prioritization', desc: 'You identify the highest-impact intervention rather than the most comprehensive one.' }, { icon: '💡', name: 'Simplicity', desc: 'You design for adoption, not capability. The simplest useful thing wins.' }, { icon: '🤲', name: 'Accessibility', desc: 'You think about what a stretched nonprofit coordinator can actually implement and maintain.' }] },
+      builder: { style: 'The Product Builder', desc: 'You think end-to-end — data sourcing, matching logic, cost model, MVP definition. You understand that a good product requires all of these to be solved simultaneously, not sequentially. That\'s a mature product sense.', strengths: [{ icon: '🏗️', name: 'End-to-End Thinking', desc: 'You solve the whole product, not just the feature you find most interesting.' }, { icon: '💰', name: 'Sustainability Model', desc: 'You think about how things survive past the initial build.' }, { icon: '📦', name: 'MVP Discipline', desc: 'You can define the smallest version that still creates real value.' }] },
+      contributor: { style: 'The Community Architect', desc: 'You\'re designing a system that outlives any individual contributor — one that becomes more valuable as more people use and contribute to it. That\'s a fundamentally different design challenge from building a product. It requires thinking about governance, incentives, and community dynamics as carefully as the technology.', strengths: [{ icon: '🌱', name: 'Community Design', desc: 'You understand that the hardest design problem is getting people to participate sustainably.' }, { icon: '♻️', name: 'Open Source Thinking', desc: 'You design for handoff, forkability, and community ownership from the start.' }, { icon: '🔗', name: 'Coalition Building', desc: 'You know that technology alone doesn\'t drive adoption — relationships do.' }] }
+    }
+  }
+];
+
+let currentChallenge = null;
+let currentLevel = null;
+let currentPromptIdx = 0;
+let answers = [];
+
+function goTo(stageId) {
+  document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+  document.getElementById(stageId).classList.add('active');
+  const em=document.getElementById('explorer-modal'); if(em) em.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function startExplorer() {
+  pickRandom();
+  renderChallenge();
+  goTo('stage-challenge');
+}
+
+function pickRandom(exclude) {
+  const pool = CHALLENGES.filter(c => c.id !== (exclude || (currentChallenge && currentChallenge.id)));
+  currentChallenge = pool[Math.floor(Math.random() * pool.length)];
+}
+
+function shuffleChallenge() {
+  pickRandom(currentChallenge && currentChallenge.id);
+  renderChallenge();
+}
+
+function renderChallenge() {
+  const c = currentChallenge;
+  document.getElementById('challenge-label').textContent = c.title;
+  document.getElementById('challenge-render').innerHTML = `
+    <div class="ch-header">
+      <div class="ch-header-left">
+        <div class="ch-eyebrow">Open challenge · Pilot example</div>
+        <div class="ch-title">${c.title}</div>
+        <div class="ch-tags">
+          <span class="ch-tag tag-type">${c.type}</span>
+          <span class="ch-tag tag-open">Open for builders</span>
+        </div>
+      </div>
+      <div class="ch-org">
+        <div class="ch-org-name">${c.org}</div>
+        <div class="ch-org-meta">${c.orgMeta}</div>
+      </div>
+    </div>
+    <div class="ch-body">
+      <div>
+        <div class="ch-section"><div class="ch-card-label">Background</div>${c.background.map(b=>`<p>${b}</p>`).join('')}</div>
+        <div class="ch-section"><div class="ch-card-label">Current workflow</div><ul class="ch-list wf-list">${c.workflow.map((w,i)=>`<li data-n="${i+1}">${w}</li>`).join('')}</ul></div>
+        <div class="ch-section"><div class="ch-card-label">The problem</div>${c.problem.map(p=>`<p>${p}</p>`).join('')}</div>
+      </div>
+      <div>
+        <div class="ch-section"><div class="ch-card-label">What success looks like</div><ul class="ch-list">${c.success.map(s=>`<li>${s}</li>`).join('')}</ul></div>
+        <div class="ch-section"><div class="ch-card-label">Possible directions</div><div class="dir-pills">${c.directions.map(d=>`<div class="dir-pill">${d}</div>`).join('')}</div><p style="font-size:0.78rem;font-style:italic;margin-top:0.75rem;opacity:0.6;">The goal is to solve the problem. The format is open.</p></div>
+        <div class="ch-section"><div class="ch-card-label">Skills that might help</div><div class="skill-chips">${c.skills.map(s=>`<span class="skill-chip">${s}</span>`).join('')}</div></div>
+      </div>
+    </div>
+  `;
+}
+
+function goToLevel() {
+  renderLevelCards();
+  goTo('stage-level');
+}
+
+function renderLevelCards() {
+  const c = currentChallenge;
+  document.getElementById('level-cards-render').innerHTML = ['seedling','builder','contributor'].map(level => {
+    const s = c.scopes[level];
+    const badges = { seedling: '<span class="lbadge lb-seed">🌱 Seedling</span>', builder: '<span class="lbadge lb-builder">🔨 Builder</span>', contributor: '<span class="lbadge lb-contrib">⭐ Contributor</span>' };
+    const descs = { seedling: 'A focused, well-scoped task. One piece of the puzzle. Good if you\'re new to this type of challenge.', builder: 'An end-to-end solution. Full responsibility. Good if you\'ve shipped projects before.', contributor: 'Architecture, stakeholders, tradeoffs. Lead a team. Good if you want to own the outcome.' };
+    return `
+      <div class="level-card" onclick="selectLevel('${level}')">
+        ${badges[level]}
+        <div class="level-name">${level.charAt(0).toUpperCase() + level.slice(1)}</div>
+        <div class="level-scope-text">${descs[level]}</div>
+        <div class="level-scope-box">
+          <div class="level-scope-title">${s.title}</div>
+          <div class="level-scope-desc">${s.desc}</div>
+        </div>
+        <button class="level-cta">Start at this level →</button>
+      </div>
+    `;
+  }).join('');
+}
+
+function selectLevel(level) {
+  currentLevel = level;
+  currentPromptIdx = 0;
+  answers = new Array(currentChallenge.prompts[level].length).fill('');
+  const levelLabels = { seedling: '🌱 Seedling', builder: '🔨 Builder', contributor: '⭐ Contributor' };
+  document.getElementById('prompt-challenge-tag').textContent = currentChallenge.title;
+  document.getElementById('prompt-level-tag').textContent = levelLabels[level];
+  renderPrompt();
+  goTo('stage-prompts');
+}
+
+function renderPrompt() {
+  const prompts = currentChallenge.prompts[currentLevel];
+  const p = prompts[currentPromptIdx];
+  const total = prompts.length;
+
+  let dots = '';
+  for (let i = 0; i < total; i++) {
+    const cls = i < currentPromptIdx ? 'done' : i === currentPromptIdx ? 'active' : '';
+    dots += `<div class="prog-seg ${cls}"></div>`;
+  }
+  document.getElementById('progress-bar').innerHTML = dots;
+
+  document.getElementById('prompt-render').innerHTML = `
+    <div class="prompt-card">
+      <div class="prompt-num">Question ${currentPromptIdx + 1} of ${total}</div>
+      <div class="prompt-q">${p.q}</div>
+      <div class="prompt-hint">${p.hint}</div>
+      <div class="prompt-examples">${p.examples.map(e=>`<span class="prompt-ex" onclick="useExample(this,'${e.replace(/'/g,"\\'")}')">${e}</span>`).join('')}</div>
+      <textarea class="prompt-input" id="pa-${currentPromptIdx}" placeholder="Type your answer — or click an idea above to get started…" rows="4" oninput="saveAns(this.value)">${answers[currentPromptIdx]||''}</textarea>
+    </div>
+  `;
+  document.getElementById('btn-prev').style.visibility = currentPromptIdx === 0 ? 'hidden' : 'visible';
+  document.getElementById('btn-next').textContent = currentPromptIdx === total - 1 ? 'See my results →' : 'Next →';
+}
+
+function useExample(el, text) {
+  document.querySelector('.prompt-input').value = text;
+  answers[currentPromptIdx] = text;
+  document.querySelectorAll('.prompt-ex').forEach(e=>e.classList.remove('used'));
+  el.classList.add('used');
+}
+function saveAns(v) { answers[currentPromptIdx] = v; }
+
+function nextPrompt() {
+  const ta = document.querySelector('.prompt-input');
+  if (ta) answers[currentPromptIdx] = ta.value;
+  const total = currentChallenge.prompts[currentLevel].length;
+  if (currentPromptIdx < total - 1) { currentPromptIdx++; renderPrompt(); }
+  else showResults();
+}
+function prevPrompt() {
+  const ta = document.querySelector('.prompt-input');
+  if (ta) answers[currentPromptIdx] = ta.value;
+  if (currentPromptIdx > 0) { currentPromptIdx--; renderPrompt(); }
+}
+
+function showResults() {
+  const sig = currentChallenge.strengthSignals[currentLevel];
+  const prompts = currentChallenge.prompts[currentLevel];
+  const levelLabel = { seedling: '🌱 Seedling', builder: '🔨 Builder', contributor: '⭐ Contributor' }[currentLevel];
+
+  const strengthsHTML = sig.strengths.map(s => `
+    <div class="strength-card">
+      <div class="strength-icon">${s.icon}</div>
+      <div class="strength-name">${s.name}</div>
+      <div class="strength-desc">${s.desc}</div>
+    </div>
+  `).join('');
+
+  const answersHTML = prompts.map((p, i) => `
+    <div class="answer-row">
+      <div class="answer-q">${p.q}</div>
+      <div class="answer-a">${answers[i] || '<em style="opacity:0.5">No answer given</em>'}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('results-render').innerHTML = `
+    <div class="results-hero">
+      <h2>You think like: ${sig.style}</h2>
+      <p>${sig.desc}</p>
+    </div>
+
+    <div class="strengths-grid">${strengthsHTML}</div>
+
+    <div class="thinking-style">
+      <div>
+        <div class="thinking-label">Challenge · Level</div>
+        <div class="thinking-type">${currentChallenge.title} · ${levelLabel}</div>
+        <div class="thinking-desc">Based on how you approached this challenge, here's what stood out about your thinking.</div>
+      </div>
+    </div>
+
+    <div class="answers-review">
+      <h3>Your approach, in your own words</h3>
+      ${answersHTML}
+    </div>
+
+    <div class="results-cta">
+      <h3>This is what Common Ground is built for.</h3>
+      <p>Real challenges. Real judgment. Real organizations that need people who think exactly like you do.</p>
+      <div class="results-cta-btns">
+        <a href="common_ground.html#get-involved" class="btn btn-gold">Join the community →</a>
+        <button class="btn btn-ghost btn-sm" style="color:var(--white);border-color:#3a4270;" onclick="tryAnother()">Try another challenge</button>
+      </div>
+    </div>
+  `;
+  goTo('stage-results');
+}
+
+function tryAnother() {
+  currentLevel = null; currentPromptIdx = 0; answers = [];
+  pickRandom();
+  renderChallenge();
+  goTo('stage-challenge');
+}
+
+
+// ── ORG WIZARD ──
+let wizardStep = 1;
+const WIZARD_TOTAL = 6;
+
+function openOrgWizard() {
+  wizardStep = 1;
+  document.getElementById('orgWizard').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  renderWizardStep();
+}
+
+function closeOrgWizard() {
+  document.getElementById('orgWizard').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function renderWizardStep() {
+  // Show correct step
+  for (let i = 1; i <= WIZARD_TOTAL; i++) {
+    const el = document.getElementById('wstep-' + i);
+    if (el) el.classList.toggle('active', i === wizardStep);
+  }
+  const success = document.getElementById('wstep-success');
+  if (success) success.classList.remove('active');
+
+  // Progress bar
+  let dots = '';
+  for (let i = 1; i <= WIZARD_TOTAL; i++) {
+    const cls = i < wizardStep ? 'done' : i === wizardStep ? 'active' : '';
+    dots += `<div class="wizard-prog-seg ${cls}"></div>`;
+  }
+  document.getElementById('wizard-progress').innerHTML = dots;
+
+  // Footer
+  const backBtn = document.getElementById('wizard-btn-back');
+  const nextBtn = document.getElementById('wizard-btn-next');
+  const footerNote = document.getElementById('wizard-footer-note');
+  if (backBtn) backBtn.style.display = wizardStep > 1 ? 'inline-flex' : 'none';
+  if (nextBtn) nextBtn.textContent = wizardStep === WIZARD_TOTAL ? 'Submit challenge →' : 'Continue →';
+  if (footerNote) footerNote.textContent = `Step ${wizardStep} of ${WIZARD_TOTAL}`;
+}
+
+function wizardNext() {
+  if (wizardStep < WIZARD_TOTAL) {
+    wizardStep++;
+    renderWizardStep();
+    document.querySelector('.wizard-modal').scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    // Submit
+    for (let i = 1; i <= WIZARD_TOTAL; i++) {
+      const el = document.getElementById('wstep-' + i);
+      if (el) el.classList.remove('active');
+    }
+    document.getElementById('wstep-success').classList.add('active');
+    document.getElementById('wizard-footer').style.display = 'none';
+    document.getElementById('wizard-progress').innerHTML = '';
+  }
+}
+
+function wizardBack() {
+  if (wizardStep > 1) {
+    wizardStep--;
+    renderWizardStep();
+    document.querySelector('.wizard-modal').scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// Close wizard on overlay click
+document.addEventListener('DOMContentLoaded', function() {
+  const overlay = document.getElementById('orgWizard');
+  if (overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeOrgWizard();
+    });
+  }
+});
+
+</script>
+
+<!-- ORG CHALLENGE WIZARD -->
+<div class="wizard-overlay" id="orgWizard">
+  <div class="wizard-modal">
+    <div class="wizard-header">
+      <div class="wizard-header-top">
+        <div class="wizard-title">Post a challenge</div>
+        <button class="wizard-close" onclick="closeOrgWizard()">×</button>
+      </div>
+      <div class="wizard-progress" id="wizard-progress"></div>
+    </div>
+    <div class="wizard-body">
+
+      <!-- STEP 1: About your org -->
+      <div class="wizard-step active" id="wstep-1">
+        <div class="wizard-step-label">Step 1 of 6</div>
+        <h3>Tell us about your organization.</h3>
+        <p class="w-hint">We use this to match your challenge to the right builders and show it to people who care about your kind of work.</p>
+        <div class="w-field">
+          <label>Organization name</label>
+          <input type="text" id="w-org-name" placeholder="e.g. Eastside Community Health Center">
+        </div>
+        <div class="w-field">
+          <label>What type of organization are you?</label>
+          <select id="w-org-type">
+            <option value="" disabled selected>Select one</option>
+            <option>Nonprofit 501(c)(3)</option>
+            <option>Civic organization</option>
+            <option>Community advocacy group</option>
+            <option>Local government department</option>
+            <option>Community foundation</option>
+            <option>Other (we may still be a fit — tell us more)</option>
+          </select>
+        </div>
+        <div class="w-field">
+          <label>Your name and email</label>
+          <input type="text" id="w-contact" placeholder="Maria Gonzalez · maria@org.org">
+        </div>
+      </div>
+
+      <!-- STEP 2: What do you do -->
+      <div class="wizard-step" id="wstep-2">
+        <div class="wizard-step-label">Step 2 of 6</div>
+        <h3>What does your organization do?</h3>
+        <p class="w-hint">One or two sentences is enough. Write it the way you'd explain it to a neighbor — not a grant committee.</p>
+        <div class="w-field">
+          <textarea id="w-org-mission" placeholder="e.g. We provide free after-school tutoring to middle schoolers in the East Side neighborhood of San Antonio." rows="3"></textarea>
+          <div class="w-example"><strong>Good example:</strong> We run a weekly food pantry serving about 300 families in the 78207 zip code. We've been doing this for 8 years with a 3-person staff and 40 regular volunteers.</div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Current workflow -->
+      <div class="wizard-step" id="wstep-3">
+        <div class="wizard-step-label">Step 3 of 6</div>
+        <h3>Walk us through how you currently handle this problem.</h3>
+        <p class="w-hint">Don't worry about whether it sounds messy. The messier it is, the more useful this is. Step by step is ideal.</p>
+        <div class="w-field">
+          <textarea id="w-workflow" placeholder="e.g. 1. Clients call us or walk in. 2. A volunteer writes their info on a paper form. 3. At the end of the day, someone re-enters it into a spreadsheet. 4. We send follow-up emails manually from Gmail..." rows="5"></textarea>
+          <div class="w-example"><strong>Why this matters:</strong> Understanding your current process helps builders see exactly where the friction is — and design something that fits how you actually work, not how a software company thinks you work.</div>
+        </div>
+      </div>
+
+      <!-- STEP 4: The problem -->
+      <div class="wizard-step" id="wstep-4">
+        <div class="wizard-step-label">Step 4 of 6</div>
+        <h3>What's the core problem you want solved?</h3>
+        <p class="w-hint">Be specific about what's painful. Time lost? Mistakes made? Things that fall through the cracks? The more concrete, the better.</p>
+        <div class="w-field">
+          <textarea id="w-problem" placeholder="e.g. Our intake coordinator spends 3 hours every Monday re-entering weekend walk-in data. We've had duplicate records and lost client information twice this year. It's slowing down how quickly we can connect families to services." rows="4"></textarea>
+        </div>
+      </div>
+
+      <!-- STEP 5: What success looks like -->
+      <div class="wizard-step" id="wstep-5">
+        <div class="wizard-step-label">Step 5 of 6</div>
+        <h3>What would a good solution look like?</h3>
+        <p class="w-hint">You don't need to know the technical answer — just describe what success feels like. What would be different? What would you stop doing? What would get easier?</p>
+        <div class="w-field">
+          <textarea id="w-success" placeholder="e.g. Ideally, client info gets entered once and is accessible to all our staff without re-typing. We'd love automatic follow-up reminders so nothing falls through the cracks. It doesn't need to be fancy — it just needs to work reliably for a team that isn't very tech-savvy." rows="4"></textarea>
+          <div class="w-example"><strong>Remember:</strong> You don't need to know whether the answer is an app, an automation, or a spreadsheet formula. That's what builders are here to figure out with you.</div>
+        </div>
+      </div>
+
+      <!-- STEP 6: Confirm -->
+      <div class="wizard-step" id="wstep-6">
+        <div class="wizard-step-label">Step 6 of 6</div>
+        <h3>One last thing.</h3>
+        <p class="w-hint">How urgent is this, and how involved do you want to be in the process?</p>
+        <div class="w-field">
+          <label>How long has this been a problem?</label>
+          <select id="w-urgency">
+            <option value="" disabled selected>Select one</option>
+            <option>It just came up</option>
+            <option>A few months</option>
+            <option>More than a year</option>
+            <option>As long as we can remember</option>
+          </select>
+        </div>
+        <div class="w-field">
+          <label>How involved can you be during the project?</label>
+          <select id="w-involvement">
+            <option value="" disabled selected>Select one</option>
+            <option>Very involved — I can meet weekly and give detailed feedback</option>
+            <option>Moderately involved — I can respond within a few days</option>
+            <option>Limited — I have maybe an hour a week</option>
+          </select>
+        </div>
+        <div class="w-field">
+          <label>Anything else builders should know? (optional)</label>
+          <textarea id="w-notes" placeholder="e.g. We use Google Workspace. Our volunteers range in age from 20 to 70. We've tried two different tools before and they didn't stick because they were too complicated..." rows="3"></textarea>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="wizard-step" id="wstep-success">
+        <div class="wizard-success">
+          <div class="ws-icon">✅</div>
+          <h3>Challenge received!</h3>
+          <p>We'll review it and reach out within a few days to talk through next steps and introduce you to builders who are interested in your challenge.</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="wizard-footer" id="wizard-footer">
+      <div class="wizard-footer-left" id="wizard-footer-note">Takes about 5 minutes · Free forever</div>
+      <div style="display:flex;gap:0.75rem;align-items:center;">
+        <button class="btn btn-ghost btn-sm" id="wizard-btn-back" onclick="wizardBack()" style="display:none;">← Back</button>
+        <button class="btn btn-gold btn-sm" id="wizard-btn-next" onclick="wizardNext()">Continue →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
